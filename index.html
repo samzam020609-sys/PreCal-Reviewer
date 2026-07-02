@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Reviewer — Linear Equations, Circles & Parabola</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --paper: #faf8f3;
+  --cream: #f2ede2;
+  --rule: #d4c9a8;
+  --accent: #b5451b;
+  --accent2: #2d6a4f;
+  --accent3: #1d4e89;
+  --gold: #c9a44a;
+  --muted: #7a7060;
+  --highlight: #fff3cd;
+  --shortcut: #e8f4e8;
+  --shortcut-border: #2d6a4f44;
+  --code-bg: #f0ebe0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  color: var(--ink);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, #2d1b4e22 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, #1b3a4b33 0%, transparent 50%);
+}
+
+/* HEADER */
+.site-header { background: var(--ink); padding: 2rem 2rem 0; text-align: center; }
+.site-header::before { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 0 auto 1.2rem; }
+.header-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; }
+.site-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 3rem); color: var(--paper); line-height: 1.15; margin-bottom: 0.4rem; }
+.site-subtitle { font-family: 'Source Serif 4', serif; font-style: italic; color: var(--rule); font-size: 1rem; margin-bottom: 2rem; }
+
+/* NAV */
+.nav-scroll { overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; background: #141425; border-top: 1px solid #ffffff18; }
+.nav-scroll::-webkit-scrollbar { display: none; }
+.nav-tabs { display: flex; gap: 0; min-width: max-content; padding: 0 1rem; }
+.tab-btn { background: none; border: none; border-bottom: 3px solid transparent; color: #8880a0; font-family: 'Source Serif 4', serif; font-size: 0.82rem; padding: 0.85rem 1.1rem; cursor: pointer; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+.tab-btn span.num { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--gold); margin-right: 0.4rem; opacity: 0.7; }
+.tab-btn:hover { color: var(--paper); }
+.tab-btn.active { color: var(--paper); border-bottom-color: var(--gold); }
+
+/* CONTENT */
+.content-wrap { max-width: 880px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+.section { display: none; animation: fadeUp 0.35s ease both; }
+.section.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+/* CARD */
+.card { background: var(--paper); border-radius: 4px; padding: 1.8rem 2rem; margin-bottom: 1.4rem; border-left: 4px solid var(--gold); box-shadow: 0 4px 24px #00000033, 0 1px 3px #00000022; position: relative; }
+.card::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 27px, var(--rule) 27px, var(--rule) 28px); opacity: 0.2; pointer-events: none; border-radius: 4px; }
+.card-blue  { border-left-color: var(--accent3); }
+.card-green { border-left-color: var(--accent2); }
+.card-red   { border-left-color: var(--accent); }
+.card-gold  { border-left-color: var(--gold); }
+.card-purple{ border-left-color: #7b4fa6; }
+
+.card-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--ink); margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.6rem; }
+
+/* SECTION HEADING */
+.section-heading { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); color: var(--paper); margin-bottom: 0.3rem; display: flex; align-items: baseline; gap: 0.8rem; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--gold); letter-spacing: 0.05em; }
+.section-desc { font-style: italic; color: #9990b8; font-size: 0.92rem; margin-bottom: 1.8rem; }
+
+/* TYPOGRAPHY */
+.card p { line-height: 1.85; color: #2a2520; margin-bottom: 0.8rem; position: relative; z-index: 1; }
+.card p:last-child { margin-bottom: 0; }
+.card strong { color: var(--accent); }
+.card em { color: var(--accent3); font-style: italic; }
+
+/* FORMULA */
+.formula { background: var(--code-bg); border: 1px solid var(--rule); border-radius: 3px; padding: 0.8rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: #1a1a2e; margin: 0.8rem 0; text-align: center; letter-spacing: 0.03em; position: relative; z-index: 1; }
+.formula .var { color: var(--accent); font-weight: 600; }
+.formula .op  { color: var(--accent3); }
+.formula .sub { font-size: 0.72em; vertical-align: sub; }
+.formula .sup { font-size: 0.72em; vertical-align: super; }
+.formula small { font-size: 0.78em; color: var(--muted); }
+
+/* SHORTCUT BOX */
+.shortcut-box {
+  background: var(--shortcut);
+  border: 1.5px solid var(--shortcut-border);
+  border-left: 4px solid var(--accent2);
+  border-radius: 3px;
+  padding: 0.85rem 1.1rem;
+  margin: 0.9rem 0;
+  font-size: 0.9rem;
+  color: #1a3a28;
+  position: relative;
+  z-index: 1;
+}
+.shortcut-box::before { content: '⚡ SHORTCUT  '; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent2); display: block; margin-bottom: 0.35rem; }
+
+/* HIGHLIGHT */
+.highlight-box { background: var(--highlight); border: 1px solid #e6c84a55; border-radius: 3px; padding: 0.85rem 1.1rem; margin: 0.8rem 0; font-size: 0.92rem; color: #5a4800; position: relative; z-index: 1; }
+.highlight-box::before { content: '★ '; color: var(--gold); font-size: 0.8rem; }
+
+/* WARNING BOX */
+.warn-box { background: #fff0ee; border: 1px solid #b5451b44; border-left: 4px solid var(--accent); border-radius: 3px; padding: 0.85rem 1.1rem; margin: 0.8rem 0; font-size: 0.9rem; color: #6b2000; position: relative; z-index: 1; }
+.warn-box::before { content: '⚠ WATCH OUT  '; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); display: block; margin-bottom: 0.35rem; }
+
+/* DEF LIST */
+.def-list { list-style: none; position: relative; z-index: 1; }
+.def-list li { display: grid; grid-template-columns: minmax(130px, auto) 1fr; gap: 0.5rem 1.2rem; padding: 0.55rem 0; border-bottom: 1px dashed var(--rule); line-height: 1.6; }
+.def-list li:last-child { border-bottom: none; }
+.def-list .term { font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; color: var(--accent3); font-weight: 600; }
+.def-list .def { color: #2a2520; }
+
+/* STEPS */
+.steps { list-style: none; position: relative; z-index: 1; counter-reset: step; }
+.steps li { counter-increment: step; padding: 0.6rem 0 0.6rem 2.8rem; position: relative; border-bottom: 1px dotted var(--rule); line-height: 1.7; color: #2a2520; }
+.steps li:last-child { border-bottom: none; }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: 0.6rem; width: 1.8rem; height: 1.8rem; background: var(--ink); color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+/* TABLE */
+.reviewer-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; position: relative; z-index: 1; margin: 0.8rem 0; }
+.reviewer-table th { background: var(--ink); color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.73rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.6rem 0.8rem; text-align: left; }
+.reviewer-table td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--rule); color: #2a2520; vertical-align: top; }
+.reviewer-table tr:last-child td { border-bottom: none; }
+.reviewer-table tr:nth-child(even) td { background: #f5f0e8; }
+
+/* GRAPH */
+.graph-wrap { background: var(--code-bg); border: 1px solid var(--rule); border-radius: 4px; padding: 0.8rem; margin: 0.8rem 0; text-align: center; position: relative; z-index: 1; }
+.graph-wrap svg { max-width: 100%; height: auto; }
+.graph-title { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-align: center; text-transform: uppercase; margin-top: 0.3rem; }
+
+/* EXAMPLE TOGGLE */
+.example-toggle { background: none; border: 1px dashed var(--rule); border-radius: 3px; padding: 0.55rem 1rem; font-family: 'Source Serif 4', serif; font-size: 0.9rem; color: var(--accent3); cursor: pointer; width: 100%; text-align: left; margin: 0.6rem 0 0; position: relative; z-index: 1; transition: background 0.2s; }
+.example-toggle:hover { background: #e8e0d0; }
+.example-toggle::after { content: ' ▸ show example'; }
+.example-toggle.open::after { content: ' ▾ hide example'; }
+.example-body { display: none; background: #eee8d8; border: 1px dashed var(--rule); border-top: none; padding: 1rem 1.2rem; font-size: 0.9rem; line-height: 1.85; color: #2a2520; position: relative; z-index: 1; }
+.example-body.open { display: block; }
+.example-body .formula { font-size: 0.91rem; background: #dfd8c8; }
+.example-body .shortcut-box { font-size: 0.88rem; }
+.example-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; margin-top: 0.9rem; margin-bottom: 0.2rem; }
+
+/* MULTI EXAMPLE TABS */
+.ex-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.6rem 0 0; position: relative; z-index: 1; }
+.ex-tab-btn { background: none; border: 1px solid var(--rule); border-radius: 3px; padding: 0.3rem 0.8rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+.ex-tab-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+.ex-tab-btn.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+.ex-panel { display: none; background: #eee8d8; border: 1px dashed var(--rule); padding: 1rem 1.2rem; font-size: 0.9rem; line-height: 1.85; color: #2a2520; margin-top: 0.3rem; position: relative; z-index: 1; }
+.ex-panel.active { display: block; }
+.ex-panel .formula { font-size: 0.91rem; background: #dfd8c8; }
+
+/* TAGS */
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; position: relative; z-index: 1; }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 100px; border: 1px solid; letter-spacing: 0.04em; }
+.tag-blue  { color: var(--accent3); border-color: var(--accent3); }
+.tag-red   { color: var(--accent); border-color: var(--accent); }
+.tag-green { color: var(--accent2); border-color: var(--accent2); }
+.tag-gold  { color: var(--gold); border-color: var(--gold); }
+
+/* TWO COLUMN GRID */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; position: relative; z-index: 1; margin: 0.7rem 0; }
+@media(max-width:560px) { .two-col { grid-template-columns: 1fr; } }
+.mini-card { background: #f0ebe0; border: 1px solid var(--rule); border-radius: 3px; padding: 0.75rem 1rem; font-size: 0.88rem; color: #2a2520; line-height: 1.7; }
+.mini-card strong { color: var(--accent3); }
+.mini-card .formula { font-size: 0.85rem; padding: 0.5rem 0.7rem; margin: 0.4rem 0; }
+
+.footer { text-align: center; padding: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #44405e; letter-spacing: 0.1em; }
+hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
+
+/* PRACTICE PROBLEMS */
+.prob-grid { display: flex; flex-direction: column; gap: 0.9rem; position: relative; z-index: 1; }
+.prob-item {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #00000018;
+  position: relative;
+}
+.prob-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 27px, var(--rule) 27px, var(--rule) 28px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+.prob-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  z-index: 1;
+}
+.prob-header:hover { background: #f5f0e855; }
+.prob-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  background: var(--ink);
+  padding: 0.25rem 0.55rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.prob-q {
+  flex: 1;
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #2a2520;
+}
+.prob-q strong { color: var(--ink); }
+.prob-q .eq {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--accent3);
+}
+.prob-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+  border: 1px solid;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 0.1rem;
+}
+.prob-tag.circ { color: var(--accent3); border-color: var(--accent3); }
+.prob-tag.para { color: var(--accent2); border-color: var(--accent2); }
+.prob-tag.hard { color: var(--accent); border-color: var(--accent); }
+.prob-chevron {
+  font-size: 0.75rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  transition: transform 0.25s;
+}
+.prob-item.open .prob-chevron { transform: rotate(90deg); }
+.prob-answer {
+  display: none;
+  border-top: 1px dashed var(--rule);
+  padding: 1rem 1.2rem 1rem 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+.prob-item.open .prob-answer { display: block; }
+.ans-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.ans-label::before { content: '✓'; }
+.ans-solution {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: #2a2520;
+}
+.ans-solution .step-line {
+  display: block;
+  padding: 0.1rem 0;
+}
+.ans-solution .ans-final {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  letter-spacing: 0.03em;
+}
+.ans-solution .formula {
+  background: #dfd8c8;
+  border: 1px solid #c8bfa8;
+  font-size: 0.88rem;
+  padding: 0.5rem 0.9rem;
+  margin: 0.4rem 0;
+  text-align: left;
+}
+
+.prob-filter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+.filter-btn {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.35rem 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+.prob-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+.prob-score span { color: var(--gold); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-label">Math Reviewer</div>
+  <h1 class="site-title">Linear Equations &amp; Circles</h1>
+  <p class="site-subtitle">Slope-Intercept · Systems · Graphing · Elimination · Kinds of Lines · Circles · Parabola</p>
+</header>
+
+<nav class="nav-scroll">
+  <div class="nav-tabs" id="navTabs">
+    <button class="tab-btn active" data-target="s1"><span class="num">01</span>y = mx + b</button>
+    <button class="tab-btn" data-target="s2"><span class="num">02</span>Two Points</button>
+    <button class="tab-btn" data-target="s3"><span class="num">03</span>Intercepts</button>
+    <button class="tab-btn" data-target="s4"><span class="num">04</span>Graphing Systems</button>
+    <button class="tab-btn" data-target="s5"><span class="num">05</span>Elimination</button>
+    <button class="tab-btn" data-target="s6"><span class="num">06</span>Kinds of Lines</button>
+    <button class="tab-btn" data-target="s7"><span class="num">07</span>Circles</button>
+    <button class="tab-btn" data-target="s8"><span class="num">08</span>Parabola</button>
+    <button class="tab-btn" data-target="s9"><span class="num">09</span>Practice Problems</button>
+  </div>
+</nav>
+
+<main class="content-wrap">
+
+<!-- ══════════════ SECTION 1 ══════════════ -->
+<section class="section active" id="s1">
+  <div class="section-heading"><span class="section-num">01 /</span> Equation of a Line via y = mx + b</div>
+  <p class="section-desc">Slope-Intercept Form, Slope Form, General Form — and how to substitute into each</p>
+
+  <div class="card card-gold">
+    <div class="card-title">📐 The Three Forms at a Glance</div>
+    <table class="reviewer-table">
+      <thead><tr><th>Name</th><th>Equation</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Slope-Intercept (SIF)</strong></td><td><code>y = mx + b</code></td><td>Slope and y-intercept are known; easiest to graph</td></tr>
+        <tr><td><strong>Slope Form (SF) / Point-Slope</strong></td><td><code>y − y₁ = m(x − x₁)</code></td><td>Slope + one point known; intermediate step</td></tr>
+        <tr><td><strong>General Form (GF)</strong></td><td><code>Ax + By + C = 0</code></td><td>Final clean answer; A, B, C are integers, A ≥ 0</td></tr>
+        <tr><td><strong>Two-Point Form</strong></td><td><code>(y−y₁)/(y₂−y₁) = (x−x₁)/(x₂−x₁)</code></td><td>Two points given; derive everything from them</td></tr>
+        <tr><td><strong>Intercept Form</strong></td><td><code>x/a + y/b = 1</code></td><td>Both intercepts are known</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">🔑 Key Variables Decoded</div>
+    <ul class="def-list">
+      <li><span class="term">m (slope)</span><span class="def">Rise ÷ Run = Δy / Δx. Measures how steep the line is and in which direction it tilts.</span></li>
+      <li><span class="term">b (y-intercept)</span><span class="def">The y-value when x = 0. It's where the line "starts" on the vertical axis.</span></li>
+      <li><span class="term">x₁, y₁</span><span class="def">A specific known point the line passes through.</span></li>
+      <li><span class="term">A, B, C</span><span class="def">Integers in General Form. A must be non-negative; no fractions or decimals allowed.</span></li>
+    </ul>
+    <div class="shortcut-box">
+      To go from <strong>SIF → GF</strong>: move all terms to the left side and clear fractions by multiplying through. Example: y = (2/3)x − 4 → multiply by 3 → 3y = 2x − 12 → <strong>2x − 3y − 12 = 0</strong>
+    </div>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">⚙️ Substituting Into y = mx + b (Step-by-Step)</div>
+    <p>Use this when you know the <strong>slope m</strong> and <strong>one point (x₁, y₁)</strong>:</p>
+    <ol class="steps">
+      <li>Write the base equation: y = mx + b</li>
+      <li>Substitute the known <em>m</em>, <em>x₁</em>, and <em>y₁</em> into the equation</li>
+      <li>Solve for <strong>b</strong> (y-intercept)</li>
+      <li>Rewrite the final equation with m and b</li>
+      <li>Convert to General Form if required: rearrange so everything is on one side = 0</li>
+    </ol>
+
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g1','e1a')">Example 1</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g1','e1b')">Example 2</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g1','e1c')">Example 3 (fraction slope)</button>
+    </div>
+    <div class="ex-panel active" id="e1a" data-group="g1">
+      <div class="example-label">Given: m = 3, passes through (2, 7)</div>
+      <div class="formula">y = 3x + b → 7 = 3(2) + b → 7 = 6 + b → b = 1</div>
+      <strong>SIF:</strong> y = 3x + 1 &nbsp;|&nbsp; <strong>GF:</strong> 3x − y + 1 = 0
+    </div>
+    <div class="ex-panel" id="e1b" data-group="g1">
+      <div class="example-label">Given: m = −2, passes through (−1, 4)</div>
+      <div class="formula">y = −2x + b → 4 = −2(−1) + b → 4 = 2 + b → b = 2</div>
+      <strong>SIF:</strong> y = −2x + 2 &nbsp;|&nbsp; <strong>GF:</strong> 2x + y − 2 = 0
+    </div>
+    <div class="ex-panel" id="e1c" data-group="g1">
+      <div class="example-label">Given: m = 2/3, passes through (3, 5)</div>
+      <div class="formula">y = (2/3)x + b → 5 = (2/3)(3) + b → 5 = 2 + b → b = 3</div>
+      <strong>SIF:</strong> y = (2/3)x + 3 → multiply by 3 → <strong>GF: 2x − 3y + 9 = 0</strong>
+      <div class="shortcut-box">Fraction slope? Multiply the entire equation by the denominator to get rid of fractions before writing GF.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Slope Quick Reference</div>
+    <table class="reviewer-table">
+      <thead><tr><th>Slope</th><th>Type</th><th>Line Goes…</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>m &gt; 0</td><td>Positive</td><td>↗ Up-right</td><td>y = 2x + 1</td></tr>
+        <tr><td>m &lt; 0</td><td>Negative</td><td>↘ Down-right</td><td>y = −3x + 4</td></tr>
+        <tr><td>m = 0</td><td>Zero</td><td>→ Horizontal</td><td>y = 5</td></tr>
+        <tr><td>m = undefined</td><td>Undefined</td><td>↕ Vertical</td><td>x = −2</td></tr>
+        <tr><td>|m| &gt; 1</td><td>Steep</td><td>More vertical</td><td>y = 5x</td></tr>
+        <tr><td>|m| &lt; 1</td><td>Gentle</td><td>More horizontal</td><td>y = 0.2x</td></tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>Rise over Run memory trick:</strong> m = 2/3 means "go UP 2, RIGHT 3" from any point to reach the next point on the line. Negative slope: go DOWN then RIGHT.
+    </div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">🔄 Converting Between All Forms</div>
+    <div class="two-col">
+      <div class="mini-card">
+        <strong>SIF → GF</strong>
+        <div class="formula">y = 2x − 5<br>→ 2x − y − 5 = 0</div>
+        Move all terms left, flip signs of moved terms.
+      </div>
+      <div class="mini-card">
+        <strong>GF → SIF</strong>
+        <div class="formula">3x + 2y − 8 = 0<br>→ 2y = −3x + 8<br>→ y = −(3/2)x + 4</div>
+        Isolate y.
+      </div>
+      <div class="mini-card">
+        <strong>SF → SIF</strong>
+        <div class="formula">y−3 = 2(x−1)<br>→ y−3 = 2x−2<br>→ y = 2x + 1</div>
+        Distribute and isolate y.
+      </div>
+      <div class="mini-card">
+        <strong>SIF → SF</strong>
+        <div class="formula">y = 3x + 2, using point (1,5):<br>→ y − 5 = 3(x − 1)</div>
+        Pick any point on the line.
+      </div>
+    </div>
+    <div class="warn-box">In General Form: A must be a <strong>positive integer</strong>. If A comes out negative, multiply the whole equation by −1. Fractions and decimals are not allowed — multiply through to clear them.</div>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 2 ══════════════ -->
+<section class="section" id="s2">
+  <div class="section-heading"><span class="section-num">02 /</span> Equation Given Two Points</div>
+  <p class="section-desc">Finding the line equation when (x₁, y₁) and (x₂, y₂) are given</p>
+
+  <div class="card card-gold">
+    <div class="card-title">📍 The Core Formula</div>
+    <p>First compute the slope, then find b using either point.</p>
+    <div class="formula">m = (y₂ − y₁) / (x₂ − x₁)</div>
+    <div class="formula">then use: y − y₁ = m(x − x₁) &nbsp;or&nbsp; substitute into y = mx + b</div>
+    <div class="shortcut-box">
+      <strong>Which point do you use to find b?</strong> Either one gives the same answer — pick whichever has nicer numbers (smaller values, no negatives if possible).
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📋 Full Method (Step-by-Step)</div>
+    <ol class="steps">
+      <li>Label your points clearly: (x₁, y₁) and (x₂, y₂)</li>
+      <li>Compute slope: m = (y₂ − y₁) / (x₂ − x₁)</li>
+      <li>Substitute m and one point into y = mx + b, then solve for b</li>
+      <li>Write the equation in SIF: y = mx + b</li>
+      <li>If needed, convert to General Form: Ax + By + C = 0</li>
+      <li>Verify by substituting <em>both</em> original points — both must satisfy the equation</li>
+    </ol>
+    <div class="warn-box">Don't mix up your x and y values! Always subtract in the same order: (y₂ − y₁) and (x₂ − x₁). Swapping order on both top and bottom is fine — the result is the same. But <strong>never</strong> subtract in different orders: (y₂ − y₁)/(x₁ − x₂) is WRONG.</div>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">✏️ Worked Examples</div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g2','e2a')">Basic</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g2','e2b')">Negative slope</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g2','e2c')">Fraction result</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g2','e2d')">Horizontal line</button>
+    </div>
+    <div class="ex-panel active" id="e2a" data-group="g2">
+      <div class="example-label">Points: (1, 3) and (4, 9)</div>
+      m = (9−3)/(4−1) = 6/3 = <strong>2</strong><br>
+      Use (1,3): 3 = 2(1) + b → b = 1<br>
+      <div class="formula">y = 2x + 1 &nbsp;|&nbsp; GF: 2x − y + 1 = 0</div>
+      Verify: (4,9) → 9 = 2(4)+1 = 9 ✓
+    </div>
+    <div class="ex-panel" id="e2b" data-group="g2">
+      <div class="example-label">Points: (−2, 5) and (3, −5)</div>
+      m = (−5−5)/(3−(−2)) = −10/5 = <strong>−2</strong><br>
+      Use (3,−5): −5 = −2(3) + b → −5 = −6 + b → b = 1<br>
+      <div class="formula">y = −2x + 1 &nbsp;|&nbsp; GF: 2x + y − 1 = 0</div>
+      Verify: (−2,5) → 5 = −2(−2)+1 = 5 ✓
+    </div>
+    <div class="ex-panel" id="e2c" data-group="g2">
+      <div class="example-label">Points: (0, 4) and (6, 7)</div>
+      m = (7−4)/(6−0) = 3/6 = <strong>1/2</strong><br>
+      Since x₁ = 0, that means (0, 4) is the y-intercept: b = 4 directly!<br>
+      <div class="formula">y = (1/2)x + 4 → multiply by 2 → GF: x − 2y + 8 = 0</div>
+      <div class="shortcut-box">If one point is (0, k), then b = k immediately. No calculation needed!</div>
+    </div>
+    <div class="ex-panel" id="e2d" data-group="g2">
+      <div class="example-label">Points: (−3, 5) and (7, 5)</div>
+      m = (5−5)/(7−(−3)) = 0/10 = <strong>0</strong><br>
+      Slope is zero → horizontal line! Just use y = the shared y-value.<br>
+      <div class="formula">y = 5 &nbsp;|&nbsp; GF: y − 5 = 0</div>
+    </div>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">⚡ Two-Point Form (Skip the Slope Step)</div>
+    <p>An alternate formula that works directly from two points:</p>
+    <div class="formula">(y − y₁) / (y₂ − y₁) = (x − x₁) / (x₂ − x₁)</div>
+    <p>Cross-multiply and simplify to get the equation directly.</p>
+    <button class="example-toggle" onclick="toggleEx(this)"></button>
+    <div class="example-body">
+      <div class="example-label">Points: (2, 1) and (5, 7)</div>
+      (y − 1)/(7 − 1) = (x − 2)/(5 − 2)<br>
+      (y − 1)/6 = (x − 2)/3<br>
+      Cross-multiply: 3(y − 1) = 6(x − 2)<br>
+      3y − 3 = 6x − 12<br>
+      <div class="formula">y = 2x − 3 &nbsp;|&nbsp; GF: 2x − y − 3 = 0</div>
+    </div>
+    <div class="shortcut-box">Two-Point Form is fastest in exams. Memorize it: set up the ratio of differences, cross-multiply, simplify.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚠️ Special Cases Summary</div>
+    <table class="reviewer-table">
+      <thead><tr><th>Condition</th><th>Type</th><th>Equation</th></tr></thead>
+      <tbody>
+        <tr><td>x₁ = x₂ (same x)</td><td>Vertical line</td><td>x = x₁ (undefined slope)</td></tr>
+        <tr><td>y₁ = y₂ (same y)</td><td>Horizontal line</td><td>y = y₁ (slope = 0)</td></tr>
+        <tr><td>One point is (0, k)</td><td>y-intercept given</td><td>b = k directly</td></tr>
+        <tr><td>One point is (k, 0)</td><td>x-intercept given</td><td>Substitute (k,0) to find b</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 3 ══════════════ -->
+<section class="section" id="s3">
+  <div class="section-heading"><span class="section-num">03 /</span> Equation Given x &amp; y Intercepts</div>
+  <p class="section-desc">When the x-intercept (a) and y-intercept (b) are both given</p>
+
+  <div class="card card-gold">
+    <div class="card-title">🎯 What Intercepts Give You</div>
+    <ul class="def-list">
+      <li><span class="term">x-intercept = a</span><span class="def">The point (a, 0) — y is always 0 on the x-axis</span></li>
+      <li><span class="term">y-intercept = b</span><span class="def">The point (0, b) — x is always 0 on the y-axis. This directly gives you <strong>b</strong> in y = mx + b!</span></li>
+    </ul>
+    <div class="shortcut-box">
+      <strong>The y-intercept IS b.</strong> So if the y-intercept = 6, you already know b = 6. You only need to compute the slope.
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📐 Intercept Form (Fastest Method)</div>
+    <p>When both intercepts are non-zero, plug directly into the <strong>Intercept Form</strong>:</p>
+    <div class="formula">x / <span class="var">a</span> + y / <span class="var">b</span> = 1</div>
+    <p>Where <strong>a</strong> = x-intercept and <strong>b</strong> = y-intercept.</p>
+    <div class="shortcut-box">
+      To convert to Standard/GF: multiply everything by ab (the LCD), then rearrange to Ax + By = C or Ax + By + C = 0.
+    </div>
+    <div class="warn-box">This formula breaks if either intercept is 0! A zero x-intercept means the line passes through the origin — use a different method.</div>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">🔄 Method via Slope + Substitution</div>
+    <ol class="steps">
+      <li>The two known points are <em>(a, 0)</em> and <em>(0, b)</em></li>
+      <li>Compute slope: m = (b − 0) / (0 − a) = <strong>−b/a</strong></li>
+      <li>Since (0, b) is the y-intercept, the y-intercept is already b. Write: y = (−b/a)x + b</li>
+      <li>Simplify or convert to General Form as needed</li>
+    </ol>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">✏️ Worked Examples</div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g3','e3a')">Example 1</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g3','e3b')">Example 2 (negative)</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g3','e3c')">Example 3 (fraction)</button>
+    </div>
+    <div class="ex-panel active" id="e3a" data-group="g3">
+      <div class="example-label">x-intercept = 4, y-intercept = 6</div>
+      Points: (4, 0) and (0, 6)<br>
+      Via Intercept Form:
+      <div class="formula">x/4 + y/6 = 1 → multiply by 12 → 3x + 2y = 12</div>
+      <strong>GF:</strong> 3x + 2y − 12 = 0 &nbsp;|&nbsp; <strong>SIF:</strong> y = −(3/2)x + 6<br>
+      Verify: (4,0) → 3(4)+2(0)=12 ✓ &nbsp; (0,6) → 3(0)+2(6)=12 ✓
+    </div>
+    <div class="ex-panel" id="e3b" data-group="g3">
+      <div class="example-label">x-intercept = −3, y-intercept = 5</div>
+      Points: (−3, 0) and (0, 5)<br>
+      Slope: m = (5−0)/(0−(−3)) = 5/3<br>
+      <div class="formula">y = (5/3)x + 5 → multiply by 3 → 3y = 5x + 15</div>
+      <strong>GF:</strong> 5x − 3y + 15 = 0<br>
+      <div class="shortcut-box">Quick intercept form check: x/−3 + y/5 = 1 → multiply by −15 → 5x − 3y = −15 → 5x − 3y + 15 = 0 ✓</div>
+    </div>
+    <div class="ex-panel" id="e3c" data-group="g3">
+      <div class="example-label">x-intercept = 2, y-intercept = 3</div>
+      <div class="formula">x/2 + y/3 = 1 → multiply by 6 → 3x + 2y = 6</div>
+      <strong>GF:</strong> 3x + 2y − 6 = 0 &nbsp;|&nbsp; <strong>SIF:</strong> y = −(3/2)x + 3
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Intercept Form vs Two-Point Method</div>
+    <table class="reviewer-table">
+      <thead><tr><th>Method</th><th>Best When</th><th>Watch Out For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Intercept Form</strong>: x/a + y/b = 1</td><td>Both intercepts are clean integers</td><td>Fails if either = 0</td></tr>
+        <tr><td><strong>Two-Point via slope + substitution</strong></td><td>Always works</td><td>More steps, easy sign errors</td></tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>Golden shortcut for GF from intercepts:</strong> If x-int = a and y-int = b, then GF is always: <strong>bx + ay = ab</strong>.<br>
+      Example: a=4, b=6 → 6x + 4y = 24 → divide by 2 → 3x + 2y = 12. Done!
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 4 ══════════════ -->
+<section class="section" id="s4">
+  <div class="section-heading"><span class="section-num">04 /</span> Graphing System of Linear Equations</div>
+  <p class="section-desc">Plotting two lines and reading where they meet</p>
+
+  <div class="card card-gold">
+    <div class="card-title">📊 What Is a System?</div>
+    <p>A <strong>system of linear equations</strong> is two or more equations considered at the same time. The <em>solution</em> is the ordered pair (x, y) that satisfies ALL equations simultaneously — it's the point where the graphs intersect.</p>
+    <ul class="def-list">
+      <li><span class="term">One solution</span><span class="def">Lines intersect at exactly one point → <em>consistent &amp; independent</em></span></li>
+      <li><span class="term">No solution</span><span class="def">Lines are parallel → <em>inconsistent</em></span></li>
+      <li><span class="term">Infinite solutions</span><span class="def">Lines are the same (overlapping) → <em>consistent &amp; dependent</em></span></li>
+    </ul>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📝 Steps to Graph a System</div>
+    <ol class="steps">
+      <li>Convert each equation to <strong>Slope-Intercept Form</strong>: y = mx + b</li>
+      <li>For each line: plot the y-intercept (0, b) on the y-axis</li>
+      <li>From the y-intercept, apply the slope (rise/run) to find a second point</li>
+      <li>Draw a straight line through those two points — extend it with arrows</li>
+      <li>Repeat for the second equation on the <em>same</em> coordinate plane</li>
+      <li>Identify the intersection point — that is your solution (x, y)</li>
+      <li>Verify by substituting the intersection into <strong>both</strong> original equations</li>
+    </ol>
+    <div class="shortcut-box">
+      <strong>3-point rule:</strong> Always plot at least 3 points per line when graphing by hand. One point to start (y-intercept), one from slope, one more as a check. A single mistake in slope direction is hard to catch with only 2 points.
+    </div>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">📈 Graph Example</div>
+    <p><strong>System:</strong> y = x + 1 &nbsp;and&nbsp; y = −x + 5</p>
+    <div class="graph-wrap">
+      <svg viewBox="0 0 300 280" width="300" height="280">
+        <!-- Grid lines -->
+        <g stroke="#d4c9a8" stroke-width="0.5">
+          <line x1="15" y1="20" x2="15" y2="240"/>
+          <line x1="55" y1="20" x2="55" y2="240"/>
+          <line x1="95" y1="20" x2="95" y2="240"/>
+          <line x1="135" y1="20" x2="135" y2="240"/>
+          <line x1="175" y1="20" x2="175" y2="240"/>
+          <line x1="215" y1="20" x2="215" y2="240"/>
+          <line x1="255" y1="20" x2="255" y2="240"/>
+          <line x1="10" y1="240" x2="270" y2="240"/>
+          <line x1="10" y1="200" x2="270" y2="200"/>
+          <line x1="10" y1="160" x2="270" y2="160"/>
+          <line x1="10" y1="120" x2="270" y2="120"/>
+          <line x1="10" y1="80" x2="270" y2="80"/>
+          <line x1="10" y1="40" x2="270" y2="40"/>
+        </g>
+        <!-- Axes -->
+        <line x1="10" y1="160" x2="275" y2="160" stroke="#1a1a2e" stroke-width="1.8"/>
+        <line x1="135" y1="15" x2="135" y2="245" stroke="#1a1a2e" stroke-width="1.8"/>
+        <!-- Arrows -->
+        <polygon points="275,157 268,160 275,163" fill="#1a1a2e"/>
+        <polygon points="132,15 135,8 138,15" fill="#1a1a2e"/>
+        <!-- Labels -->
+        <text x="278" y="164" font-family="JetBrains Mono,monospace" font-size="10" fill="#1a1a2e">x</text>
+        <text x="139" y="10" font-family="JetBrains Mono,monospace" font-size="10" fill="#1a1a2e">y</text>
+        <!-- Tick labels (scale: 40px/unit, origin at 135,160) -->
+        <text x="128" y="115" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a7060">1</text>
+        <text x="128" y="75" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a7060">2</text>
+        <text x="128" y="35" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a7060">3</text>
+        <text x="128" y="205" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a7060">-1</text>
+        <text x="168" y="156" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a7060">1</text>
+        <text x="208" y="156" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a7060">2</text>
+        <text x="248" y="156" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a7060">3</text>
+        <text x="88" y="156" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a7060">-1</text>
+        <!-- y=x+1: origin(135,160), pts: (-3,-2)→(15,240) to (3,4)→(255,40) -->
+        <line x1="15" y1="240" x2="255" y2="40" stroke="#1d4e89" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- y=-x+5: (-1,6)→(95,0 off chart); x=0,y=5→(135,−40 off); x=1,y=4→(175,0) ; x=3,y=2→(255,80) ; x=-1,y=6 off -->
+        <!-- Use x=0,y=5 → py=160-5*40=-40; clip. x=1,y=4→(175,0); x=2,y=3→(215,40); x=3,y=2→(255,80) -->
+        <!-- Start from x=-0.5,y=5.5→(115,−60) clip; start x=0.5,y=4.5 → (155,−20)clip; x=1,y=4→(175,0) to x=3,y=2→(255,80) extend:x=-1,y=6→(95,0) -->
+        <line x1="15" y1="80" x2="255" y2="240" stroke="#b5451b" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Intersection: x=2, y=3 → (135+80, 160-120) = (215, 40) -->
+        <circle cx="215" cy="40" r="6" fill="#2d6a4f" stroke="white" stroke-width="2"/>
+        <text x="220" y="35" font-family="JetBrains Mono,monospace" font-size="9" fill="#2d6a4f" font-weight="600">(2, 3)</text>
+        <!-- y-intercept dots -->
+        <circle cx="135" cy="120" r="4" fill="#1d4e89" stroke="white" stroke-width="1.5"/>
+        <text x="140" y="118" font-family="JetBrains Mono,monospace" font-size="8" fill="#1d4e89">(0,1)</text>
+        <circle cx="135" cy="0" r="0"/><!-- y=5 off chart -->
+        <!-- Legend -->
+        <line x1="20" y1="266" x2="55" y2="266" stroke="#1d4e89" stroke-width="2.5"/>
+        <text x="60" y="270" font-family="JetBrains Mono,monospace" font-size="9" fill="#1d4e89">y = x + 1</text>
+        <line x1="160" y1="266" x2="195" y2="266" stroke="#b5451b" stroke-width="2.5"/>
+        <text x="200" y="270" font-family="JetBrains Mono,monospace" font-size="9" fill="#b5451b">y = −x + 5</text>
+      </svg>
+      <div class="graph-title">Intersection → solution (2, 3)</div>
+    </div>
+    <div class="highlight-box">Verify: (2,3) in y=x+1 → 3=2+1 ✓ &nbsp;|&nbsp; (2,3) in y=−x+5 → 3=−2+5 ✓</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">📌 How to Plot Using Slope (Visual Method)</div>
+    <div class="two-col">
+      <div class="mini-card">
+        <strong>Positive slope (m = 2/3)</strong><br>
+        Start at y-intercept → go UP 2, RIGHT 3 → mark point → draw line
+      </div>
+      <div class="mini-card">
+        <strong>Negative slope (m = −3/4)</strong><br>
+        Start at y-intercept → go DOWN 3, RIGHT 4 → mark point → draw line
+      </div>
+    </div>
+    <div class="shortcut-box">
+      <strong>Intercept method for graphing:</strong> Instead of using slope, plot both the x-intercept (let y=0, solve for x) and y-intercept (let x=0, solve for y). Connect the two intercepts — done in 2 steps!
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Reading the Graph — What to Expect</div>
+    <table class="reviewer-table">
+      <thead><tr><th>What you see on graph</th><th>Conclusion</th><th>Type of system</th></tr></thead>
+      <tbody>
+        <tr><td>Two lines crossing at one point</td><td>One solution (x, y)</td><td>Consistent &amp; Independent</td></tr>
+        <tr><td>Two parallel lines, never touch</td><td>No solution</td><td>Inconsistent</td></tr>
+        <tr><td>One line (both equations plot same line)</td><td>Infinitely many solutions</td><td>Consistent &amp; Dependent</td></tr>
+      </tbody>
+    </table>
+    <div class="warn-box">Graphing is the <strong>least precise</strong> method — intersection points with non-integer coordinates are hard to read accurately. When exactness is needed, use Elimination or Substitution.</div>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 5 ══════════════ -->
+<section class="section" id="s5">
+  <div class="section-heading"><span class="section-num">05 /</span> Solving by Elimination</div>
+  <p class="section-desc">Cancel one variable by combining equations — then solve for the other</p>
+
+  <div class="card card-gold">
+    <div class="card-title">💡 The Core Idea</div>
+    <p>The <strong>Elimination Method</strong> (also called Addition Method) works by making the coefficient of one variable <em>opposites</em> in the two equations. When you add the equations, that variable disappears.</p>
+    <div class="formula">If: 3x + 5y = 20 &nbsp;and&nbsp; 3x − 5y = 4<br>→ Add: 6x = 24 → x = 4 &nbsp;(y eliminated!)</div>
+    <div class="shortcut-box">
+      <strong>Rule of thumb:</strong> Eliminate whichever variable is easiest — usually the one whose coefficients are already equal or easy to make equal with a single multiplication.
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📋 Full Step-by-Step Process</div>
+    <ol class="steps">
+      <li>Write both equations in <strong>standard form</strong>: Ax + By = C (no variables on the right side)</li>
+      <li>Choose which variable to eliminate (x or y)</li>
+      <li>If needed, multiply one or both equations by a constant to make those coefficients <strong>opposite numbers</strong> (e.g., +4 and −4)</li>
+      <li><strong>Add</strong> the two equations. One variable cancels.</li>
+      <li>Solve the resulting one-variable equation</li>
+      <li>Substitute the solved value back into either original equation to find the other variable</li>
+      <li>Write the answer as an ordered pair (x, y)</li>
+      <li>Check by substituting into <strong>both</strong> original equations</li>
+    </ol>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">✏️ Worked Examples</div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g5','e5a')">Opposites ready</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g5','e5b')">Multiply one eq.</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g5','e5c')">Multiply both eqs.</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g5','e5d')">No solution case</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g5','e5e')">Infinite solutions</button>
+    </div>
+    <div class="ex-panel active" id="e5a" data-group="g5">
+      <div class="example-label">System: 2x + 3y = 12 and 4x − 3y = 6</div>
+      y-coefficients: +3 and −3 → already opposites!<br>
+      <div class="formula">Add: (2x+4x) + (3y−3y) = 12+6 → 6x = 18 → x = 3</div>
+      Sub x=3 into eq.1: 2(3)+3y=12 → 6+3y=12 → 3y=6 → <strong>y=2</strong>
+      <div class="formula">Solution: (3, 2)</div>
+      Check: eq.2 → 4(3)−3(2)=12−6=6 ✓
+    </div>
+    <div class="ex-panel" id="e5b" data-group="g5">
+      <div class="example-label">System: 3x + 2y = 11 and x + y = 4</div>
+      Eliminate x: multiply eq.2 by −3 → −3x − 3y = −12<br>
+      <div class="formula">Add: (3x−3x)+(2y−3y)=11−12 → −y = −1 → y = 1</div>
+      Sub y=1 into eq.2: x+1=4 → <strong>x=3</strong>
+      <div class="formula">Solution: (3, 1)</div>
+      Check eq.1: 3(3)+2(1)=9+2=11 ✓
+    </div>
+    <div class="ex-panel" id="e5c" data-group="g5">
+      <div class="example-label">System: 2x + 3y = 7 and 3x + 5y = 11</div>
+      Eliminate x: multiply eq.1 by 3, eq.2 by −2<br>
+      → 6x + 9y = 21 and −6x − 10y = −22<br>
+      <div class="formula">Add: −y = −1 → y = 1</div>
+      Sub y=1 into eq.1: 2x+3(1)=7 → 2x=4 → <strong>x=2</strong>
+      <div class="formula">Solution: (2, 1)</div>
+      <div class="shortcut-box">To eliminate x: find LCM of x-coefficients (2 and 3 → LCM=6). Multiply eq.1 by 3, eq.2 by −2.</div>
+    </div>
+    <div class="ex-panel" id="e5d" data-group="g5">
+      <div class="example-label">System: 2x + 4y = 8 and x + 2y = 7</div>
+      Multiply eq.2 by −2: → −2x − 4y = −14<br>
+      <div class="formula">Add: 0x + 0y = 8 + (−14) → 0 = −6</div>
+      This is <strong>false</strong> → the system has <strong>no solution</strong> (parallel lines)!
+    </div>
+    <div class="ex-panel" id="e5e" data-group="g5">
+      <div class="example-label">System: 2x + 4y = 8 and x + 2y = 4</div>
+      Multiply eq.2 by −2: → −2x − 4y = −8<br>
+      <div class="formula">Add: 0x + 0y = 8 + (−8) → 0 = 0</div>
+      This is <strong>always true</strong> → <strong>infinite solutions</strong> (same line / dependent system)!
+    </div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">🧮 Choosing What to Eliminate</div>
+    <table class="reviewer-table">
+      <thead><tr><th>Situation</th><th>Strategy</th></tr></thead>
+      <tbody>
+        <tr><td>Coefficients already opposite: +3 and −3</td><td>Just add directly — no multiplication needed</td></tr>
+        <tr><td>Same coefficient: +4 and +4</td><td>Multiply one eq. by −1, then add</td></tr>
+        <tr><td>One is a multiple: 2 and 6</td><td>Multiply the eq. with 2 by −3, add</td></tr>
+        <tr><td>No obvious relationship: 3 and 5</td><td>Use LCM: multiply eq.1 by 5, eq.2 by −3 (or vice versa)</td></tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>LCM Shortcut:</strong> To eliminate variable with coefficients a and b, multiply eq.1 by b and eq.2 by −a (or vice versa). Example: coefficients 4 and 6 → multiply by 6 and −4, giving 24 and −24.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏁 Interpreting Results at End of Elimination</div>
+    <table class="reviewer-table">
+      <thead><tr><th>What you get after eliminating</th><th>Meaning</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>x = number (or y = number)</td><td>One solution exists</td><td>Back-substitute to find the other variable</td></tr>
+        <tr><td>0 = 0 (true statement)</td><td>Infinite solutions</td><td>Write: "dependent system — infinitely many solutions"</td></tr>
+        <tr><td>0 = nonzero (false)</td><td>No solution</td><td>Write: "inconsistent system — no solution"</td></tr>
+      </tbody>
+    </table>
+    <div class="warn-box">After finding one variable, always substitute back into an <strong>original equation</strong>, not the manipulated one, to avoid errors.</div>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 6 ══════════════ -->
+<section class="section" id="s6">
+  <div class="section-heading"><span class="section-num">06 /</span> Kinds of Lines</div>
+  <p class="section-desc">Parallel, Perpendicular, Intersecting, and Overlapping Lines</p>
+
+  <div class="card card-gold">
+    <div class="card-title">🗂️ Complete Classification Table</div>
+    <table class="reviewer-table">
+      <thead><tr><th>Type</th><th>Slope Condition</th><th>y-int</th><th>Solutions</th><th>System Type</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Intersecting</strong></td><td>m₁ ≠ m₂</td><td>Any</td><td>Exactly 1</td><td>Consistent &amp; Independent</td></tr>
+        <tr><td><strong>Parallel</strong></td><td>m₁ = m₂</td><td>b₁ ≠ b₂</td><td>None</td><td>Inconsistent</td></tr>
+        <tr><td><strong>Overlapping (Coincident)</strong></td><td>m₁ = m₂</td><td>b₁ = b₂</td><td>Infinite</td><td>Consistent &amp; Dependent</td></tr>
+        <tr><td><strong>Perpendicular</strong></td><td>m₁ × m₂ = −1</td><td>Any</td><td>Exactly 1</td><td>Consistent &amp; Independent</td></tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>The fastest check:</strong> Convert both equations to SIF and just compare slopes (m) and y-intercepts (b). Same m, different b → parallel. Same m, same b → overlapping. Different m → intersecting.
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">∥ Parallel Lines — Deep Dive</div>
+    <p>Parallel lines have the <strong>same slope</strong> but <strong>different y-intercepts</strong>. They run in the same direction, maintaining a constant distance between them — never meeting.</p>
+    <div class="formula">m₁ = m₂ &nbsp;and&nbsp; b₁ ≠ b₂</div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g6a','e6a1')">Example 1</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g6a','e6a2')">Example 2 (GF)</button>
+    </div>
+    <div class="ex-panel active" id="e6a1" data-group="g6a">
+      <div class="example-label">Are y = 3x + 2 and y = 3x − 7 parallel?</div>
+      Both have m = 3. y-intercepts: 2 ≠ −7. → <strong>Yes, parallel! No solution.</strong>
+    </div>
+    <div class="ex-panel" id="e6a2" data-group="g6a">
+      <div class="example-label">Are 2x − 4y + 8 = 0 and x − 2y + 1 = 0 parallel?</div>
+      Convert to SIF:<br>
+      Eq.1: −4y = −2x − 8 → y = (1/2)x + 2<br>
+      Eq.2: −2y = −x − 1 → y = (1/2)x + (1/2)<br>
+      Same slope (1/2), different b → <strong>Parallel! Inconsistent.</strong>
+    </div>
+    <div class="highlight-box">A line parallel to y = mx + b through point (x₁, y₁) has the same slope m. Just substitute to find b: y₁ = m·x₁ + b → solve for b.</div>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">⊥ Perpendicular Lines — Deep Dive</div>
+    <p>Two lines are perpendicular if their slopes are <strong>negative reciprocals</strong>. They meet at exactly one point and form a 90° angle.</p>
+    <div class="formula">m₁ × m₂ = −1 &nbsp;&nbsp;→&nbsp;&nbsp; m₂ = −1/m₁</div>
+    <p>To get the negative reciprocal: <em>flip the fraction and change the sign.</em></p>
+    <table class="reviewer-table">
+      <thead><tr><th>Slope m₁</th><th>Perpendicular slope m₂</th><th>Check: m₁×m₂</th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td>−1/2</td><td>2 × (−1/2) = −1 ✓</td></tr>
+        <tr><td>3/4</td><td>−4/3</td><td>(3/4)(−4/3) = −1 ✓</td></tr>
+        <tr><td>−5</td><td>1/5</td><td>(−5)(1/5) = −1 ✓</td></tr>
+        <tr><td>1</td><td>−1</td><td>1×(−1) = −1 ✓</td></tr>
+        <tr><td>−2/3</td><td>3/2</td><td>(−2/3)(3/2) = −1 ✓</td></tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>Finding a perpendicular line through a point:</strong><br>
+      1) Take the negative reciprocal of the given slope.<br>
+      2) Use y − y₁ = m_new(x − x₁) with the new slope and given point.
+    </div>
+    <button class="example-toggle" onclick="toggleEx(this)"></button>
+    <div class="example-body">
+      <div class="example-label">Find the line perpendicular to y = 2x + 5, passing through (4, 1)</div>
+      Slope of given line: m = 2<br>
+      Perpendicular slope: m⊥ = −1/2<br>
+      Use point-slope: y − 1 = −(1/2)(x − 4)<br>
+      y − 1 = −(1/2)x + 2<br>
+      <div class="formula">y = −(1/2)x + 3 &nbsp;|&nbsp; GF: x + 2y − 6 = 0</div>
+    </div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">↔️ Overlapping (Coincident) Lines</div>
+    <p>When two different-looking equations actually represent the <strong>same line</strong>. Every point on the line is a solution.</p>
+    <p>This happens when one equation is just a <em>scalar multiple</em> of the other.</p>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g6b','e6b1')">Example 1</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g6b','e6b2')">Example 2</button>
+    </div>
+    <div class="ex-panel active" id="e6b1" data-group="g6b">
+      <div class="example-label">y = 2x + 4 and 4x − 2y + 8 = 0</div>
+      Convert eq.2: −2y = −4x − 8 → y = 2x + 4<br>
+      <strong>Identical! → Infinitely many solutions (dependent system)</strong>
+    </div>
+    <div class="ex-panel" id="e6b2" data-group="g6b">
+      <div class="example-label">3x + 6y = 12 and x + 2y = 4</div>
+      Divide eq.1 by 3: x + 2y = 4 → identical to eq.2!<br>
+      <strong>Same line → Infinite solutions</strong>
+    </div>
+    <div class="highlight-box">Quick check: divide one equation by the other's coefficients. If all ratios are equal (A₁/A₂ = B₁/B₂ = C₁/C₂), the lines are the same.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">👁️ Visual Summary of All Four Types</div>
+    <div class="graph-wrap">
+      <svg viewBox="0 0 530 175" width="530" height="175">
+        <!-- Panel 1: Intersecting -->
+        <rect x="5" y="5" width="120" height="120" fill="#f5f0e8" stroke="#d4c9a8" stroke-width="1" rx="3"/>
+        <line x1="5" y1="65" x2="125" y2="65" stroke="#ccc" stroke-width="0.5"/>
+        <line x1="65" y1="5" x2="65" y2="125" stroke="#ccc" stroke-width="0.5"/>
+        <line x1="15" y1="110" x2="115" y2="20" stroke="#1d4e89" stroke-width="2.5"/>
+        <line x1="15" y1="20" x2="115" y2="110" stroke="#b5451b" stroke-width="2.5"/>
+        <circle cx="65" cy="65" r="5" fill="#2d6a4f" stroke="white" stroke-width="1.5"/>
+        <text x="65" y="140" font-family="Source Serif 4,serif" font-size="11" fill="#2a2520" text-anchor="middle" font-weight="600">Intersecting</text>
+        <text x="65" y="155" font-family="JetBrains Mono,monospace" font-size="8" fill="#2d6a4f" text-anchor="middle">1 solution</text>
+        <text x="65" y="168" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#7a7060" text-anchor="middle">m₁ ≠ m₂</text>
+        <!-- Panel 2: Parallel -->
+        <rect x="135" y="5" width="120" height="120" fill="#f5f0e8" stroke="#d4c9a8" stroke-width="1" rx="3"/>
+        <line x1="135" y1="65" x2="255" y2="65" stroke="#ccc" stroke-width="0.5"/>
+        <line x1="195" y1="5" x2="195" y2="125" stroke="#ccc" stroke-width="0.5"/>
+        <line x1="145" y1="95" x2="245" y2="30" stroke="#1d4e89" stroke-width="2.5"/>
+        <line x1="145" y1="115" x2="245" y2="50" stroke="#b5451b" stroke-width="2.5" stroke-dasharray="6,3"/>
+        <text x="195" y="140" font-family="Source Serif 4,serif" font-size="11" fill="#2a2520" text-anchor="middle" font-weight="600">Parallel</text>
+        <text x="195" y="155" font-family="JetBrains Mono,monospace" font-size="8" fill="#b5451b" text-anchor="middle">no solution</text>
+        <text x="195" y="168" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#7a7060" text-anchor="middle">m₁ = m₂, b₁ ≠ b₂</text>
+        <!-- Panel 3: Overlapping -->
+        <rect x="265" y="5" width="120" height="120" fill="#f5f0e8" stroke="#d4c9a8" stroke-width="1" rx="3"/>
+        <line x1="265" y1="65" x2="385" y2="65" stroke="#ccc" stroke-width="0.5"/>
+        <line x1="325" y1="5" x2="325" y2="125" stroke="#ccc" stroke-width="0.5"/>
+        <line x1="275" y1="100" x2="375" y2="30" stroke="#1d4e89" stroke-width="5"/>
+        <line x1="275" y1="100" x2="375" y2="30" stroke="#b5451b" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="325" y="140" font-family="Source Serif 4,serif" font-size="11" fill="#2a2520" text-anchor="middle" font-weight="600">Overlapping</text>
+        <text x="325" y="155" font-family="JetBrains Mono,monospace" font-size="8" fill="#7a7060" text-anchor="middle">∞ solutions</text>
+        <text x="325" y="168" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#7a7060" text-anchor="middle">m₁=m₂, b₁=b₂</text>
+        <!-- Panel 4: Perpendicular -->
+        <rect x="395" y="5" width="120" height="120" fill="#f5f0e8" stroke="#d4c9a8" stroke-width="1" rx="3"/>
+        <line x1="395" y1="65" x2="515" y2="65" stroke="#ccc" stroke-width="0.5"/>
+        <line x1="455" y1="5" x2="455" y2="125" stroke="#ccc" stroke-width="0.5"/>
+        <line x1="405" y1="95" x2="505" y2="35" stroke="#1d4e89" stroke-width="2.5"/>
+        <line x1="455" y1="5" x2="455" y2="125" stroke="#b5451b" stroke-width="2.5"/>
+        <rect x="451" y="61" width="8" height="8" fill="none" stroke="#2d6a4f" stroke-width="1.5"/>
+        <text x="455" y="140" font-family="Source Serif 4,serif" font-size="11" fill="#2a2520" text-anchor="middle" font-weight="600">Perpendicular</text>
+        <text x="455" y="155" font-family="JetBrains Mono,monospace" font-size="8" fill="#1d4e89" text-anchor="middle">90° angle</text>
+        <text x="455" y="168" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#7a7060" text-anchor="middle">m₁ × m₂ = −1</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">⚡ All Shortcuts in One Place</div>
+    <div class="shortcut-box">
+      <strong>Check if parallel:</strong> Compare slopes. If equal and b's differ → parallel.<br>
+      <strong>Check if perpendicular:</strong> Multiply slopes. If product = −1 → perpendicular.<br>
+      <strong>Check if overlapping:</strong> Write in SIF. If both equations are literally identical → overlapping.<br>
+      <strong>Find perpendicular slope:</strong> Flip the fraction and negate. E.g., 3/5 → −5/3.
+    </div>
+    <div class="warn-box">
+      A vertical line (x = a) is perpendicular to any horizontal line (y = b). Vertical lines have <em>undefined</em> slope, so the m₁×m₂=−1 rule doesn't apply — but they ARE perpendicular geometrically.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 7 ══════════════ -->
+<section class="section" id="s7">
+  <div class="section-heading"><span class="section-num">07 /</span> Circles</div>
+  <p class="section-desc">Distance Formula · Midpoint Formula · Standard &amp; General Form · Completing the Square</p>
+
+  <div class="card card-gold">
+    <div class="card-title">📏 Distance Formula</div>
+    <p>The distance between two points is derived from the Pythagorean Theorem. The horizontal distance (Δx) and vertical distance (Δy) form the legs of a right triangle; the distance is the hypotenuse.</p>
+    <div class="formula">d = √[(x₂ − x₁)² + (y₂ − y₁)²]</div>
+    <div class="shortcut-box">
+      <strong>Order doesn't matter:</strong> (x₂−x₁)² = (x₁−x₂)² because squaring removes the negative. Always subtract in the same order (2 minus 1), but either order gives the same answer.
+    </div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g7a','e7a1')">Example 1</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7a','e7a2')">Example 2 (negatives)</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7a','e7a3')">Example 3 (check answer)</button>
+    </div>
+    <div class="ex-panel active" id="e7a1" data-group="g7a">
+      <div class="example-label">Points: (1, 2) and (4, 6)</div>
+      <div class="formula">d = √[(4−1)² + (6−2)²] = √[9 + 16] = √25 = 5</div>
+    </div>
+    <div class="ex-panel" id="e7a2" data-group="g7a">
+      <div class="example-label">Points: (−3, 1) and (5, −5)</div>
+      <div class="formula">d = √[(5−(−3))² + (−5−1)²] = √[64 + 36] = √100 = 10</div>
+    </div>
+    <div class="ex-panel" id="e7a3" data-group="g7a">
+      <div class="example-label">Points: (2, 3) and (7, 15) — leave in radical form</div>
+      <div class="formula">d = √[(7−2)² + (15−3)²] = √[25 + 144] = √169 = 13</div>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">➕ Midpoint Formula</div>
+    <p>The midpoint is simply the <strong>average</strong> of the x-coordinates and the average of the y-coordinates.</p>
+    <div class="formula">M = ((x₁ + x₂)/2 , (y₁ + y₂)/2)</div>
+    <div class="shortcut-box">
+      <strong>Memory trick:</strong> "Middle = Average." Add both x's and divide by 2. Add both y's and divide by 2.
+    </div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g7b','e7b1')">Example 1</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7b','e7b2')">Example 2</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7b','e7b3')">Find missing endpoint</button>
+    </div>
+    <div class="ex-panel active" id="e7b1" data-group="g7b">
+      <div class="example-label">Midpoint of (2, 4) and (8, 10)</div>
+      <div class="formula">M = ((2+8)/2, (4+10)/2) = (5, 7)</div>
+    </div>
+    <div class="ex-panel" id="e7b2" data-group="g7b">
+      <div class="example-label">Midpoint of (−3, 5) and (7, −1)</div>
+      <div class="formula">M = ((−3+7)/2, (5+(−1))/2) = (4/2, 4/2) = (2, 2)</div>
+    </div>
+    <div class="ex-panel" id="e7b3" data-group="g7b">
+      <div class="example-label">Midpoint is (3, 5). One endpoint is (1, 2). Find the other.</div>
+      Let other endpoint = (x₂, y₂)<br>
+      (1+x₂)/2 = 3 → x₂ = 5<br>
+      (2+y₂)/2 = 5 → y₂ = 8<br>
+      <div class="formula">Other endpoint: (5, 8)</div>
+      <div class="shortcut-box">Find missing endpoint: double the midpoint coords, then subtract the known endpoint. x₂ = 2(3)−1 = 5, y₂ = 2(5)−2 = 8.</div>
+    </div>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">⭕ Standard Form of a Circle</div>
+    <p>A circle with center (h, k) and radius r:</p>
+    <div class="formula">(x − h)² + (y − k)² = r²</div>
+    <ul class="def-list">
+      <li><span class="term">(h, k)</span><span class="def">Center — read directly from the equation (flip signs!)</span></li>
+      <li><span class="term">r</span><span class="def">Radius — take the square root of the right-hand side</span></li>
+    </ul>
+    <div class="warn-box"><strong>Sign trap!</strong> (x − 3)² means h = +3, NOT −3. (y + 2)² = (y − (−2))² means k = −2, NOT +2. Always flip the sign when reading center from standard form.</div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g7c','e7c1')">Write equation</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7c','e7c2')">Read center &amp; radius</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7c','e7c3')">Origin center</button>
+    </div>
+    <div class="ex-panel active" id="e7c1" data-group="g7c">
+      <div class="example-label">Center (3, −2), radius = 5</div>
+      <div class="formula">(x − 3)² + (y − (−2))² = 5² → (x − 3)² + (y + 2)² = 25</div>
+    </div>
+    <div class="ex-panel" id="e7c2" data-group="g7c">
+      <div class="example-label">Read from: (x + 4)² + (y − 1)² = 49</div>
+      h = −4, k = 1 (flip the signs!) → Center = (−4, 1)<br>
+      r² = 49 → r = 7<br>
+      <div class="formula">Center: (−4, 1) &nbsp;|&nbsp; Radius: 7</div>
+    </div>
+    <div class="ex-panel" id="e7c3" data-group="g7c">
+      <div class="example-label">Circle centered at origin, radius = √10</div>
+      h=0, k=0 → special case:<br>
+      <div class="formula">x² + y² = 10</div>
+    </div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">🔁 General Form → Standard Form (Completing the Square)</div>
+    <div class="formula">x² + y² + Dx + Ey + F = 0</div>
+    <ol class="steps">
+      <li>Group x-terms and y-terms: (x² + Dx) + (y² + Ey) = −F</li>
+      <li>Complete the square for x: add (D/2)² to both sides</li>
+      <li>Complete the square for y: add (E/2)² to both sides</li>
+      <li>Factor the left side into perfect squares</li>
+      <li>Identify center (h, k) and radius r</li>
+    </ol>
+    <div class="shortcut-box">
+      <strong>Completing the square trick:</strong> Take the coefficient of x (or y), halve it, square it — add to both sides.<br>
+      x² + 6x → take 6, halve → 3, square → 9 → add 9: (x² + 6x + 9) = (x + 3)²
+    </div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g7d','e7d1')">Example 1</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7d','e7d2')">Example 2 (odd coeff)</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7d','e7d3')">Example 3 (leading coeff)</button>
+    </div>
+    <div class="ex-panel active" id="e7d1" data-group="g7d">
+      <div class="example-label">x² + y² − 6x + 4y − 12 = 0</div>
+      Group: (x² − 6x) + (y² + 4y) = 12<br>
+      Complete x: add (3)² = 9 → (x−3)²<br>
+      Complete y: add (2)² = 4 → (y+2)²<br>
+      <div class="formula">(x−3)² + (y+2)² = 12 + 9 + 4 = 25</div>
+      Center: (3, −2) &nbsp;|&nbsp; r = 5
+    </div>
+    <div class="ex-panel" id="e7d2" data-group="g7d">
+      <div class="example-label">x² + y² + 10x − 2y + 1 = 0</div>
+      Group: (x²+10x) + (y²−2y) = −1<br>
+      Complete x: (10/2)²=25 → add 25: (x+5)²<br>
+      Complete y: (2/2)²=1 → add 1: (y−1)²<br>
+      <div class="formula">(x+5)² + (y−1)² = −1 + 25 + 1 = 25</div>
+      Center: (−5, 1) &nbsp;|&nbsp; r = 5
+    </div>
+    <div class="ex-panel" id="e7d3" data-group="g7d">
+      <div class="example-label">2x² + 2y² − 8x + 12y − 24 = 0</div>
+      Divide everything by 2 first: x² + y² − 4x + 6y − 12 = 0<br>
+      Group: (x²−4x) + (y²+6y) = 12<br>
+      Complete x: add 4 → (x−2)²<br>
+      Complete y: add 9 → (y+3)²<br>
+      <div class="formula">(x−2)² + (y+3)² = 12+4+9 = 25</div>
+      Center: (2, −3) &nbsp;|&nbsp; r = 5
+      <div class="shortcut-box">When leading coefficient ≠ 1, always divide by it first before completing the square!</div>
+    </div>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">🗺️ Given Diameter Endpoints → Circle Equation</div>
+    <ol class="steps">
+      <li>Use <strong>Midpoint Formula</strong> to find the center (midpoint of diameter)</li>
+      <li>Use <strong>Distance Formula</strong> to find diameter length, then r = diameter/2<br>
+          <em>OR</em> find distance from center to either endpoint — that's the radius directly</li>
+      <li>Substitute (h, k) and r into Standard Form</li>
+    </ol>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g7e','e7e1')">Example 1</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g7e','e7e2')">Example 2</button>
+    </div>
+    <div class="ex-panel active" id="e7e1" data-group="g7e">
+      <div class="example-label">Diameter endpoints: (1, 2) and (5, 8)</div>
+      Center = midpoint: ((1+5)/2, (2+8)/2) = <strong>(3, 5)</strong><br>
+      r = distance from (3,5) to (5,8):
+      <div class="formula">r = √[(5−3)² + (8−5)²] = √[4+9] = √13</div>
+      <div class="formula">(x−3)² + (y−5)² = 13</div>
+    </div>
+    <div class="ex-panel" id="e7e2" data-group="g7e">
+      <div class="example-label">Diameter endpoints: (−4, 0) and (4, 6)</div>
+      Center = ((−4+4)/2, (0+6)/2) = <strong>(0, 3)</strong><br>
+      r = distance from (0,3) to (4,6):
+      <div class="formula">r = √[16+9] = √25 = 5</div>
+      <div class="formula">x² + (y−3)² = 25</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Circle Formula Quick Reference</div>
+    <table class="reviewer-table">
+      <thead><tr><th>Formula / Info</th><th>Expression</th></tr></thead>
+      <tbody>
+        <tr><td>Distance formula</td><td>d = √[(x₂−x₁)² + (y₂−y₁)²]</td></tr>
+        <tr><td>Midpoint formula</td><td>M = ((x₁+x₂)/2, (y₁+y₂)/2)</td></tr>
+        <tr><td>Missing endpoint</td><td>x₂ = 2·Mx − x₁ &nbsp;(and same for y)</td></tr>
+        <tr><td>Standard form</td><td>(x−h)² + (y−k)² = r²</td></tr>
+        <tr><td>General form</td><td>x² + y² + Dx + Ey + F = 0</td></tr>
+        <tr><td>Center from General</td><td>(h, k) = (−D/2, −E/2)</td></tr>
+        <tr><td>Radius from General</td><td>r = √[(D/2)² + (E/2)² − F]</td></tr>
+        <tr><td>Completing square: x</td><td>x² + Dx = (x + D/2)² − (D/2)²</td></tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>Fast center/radius from General Form (no completing the square):</strong><br>
+      Center = (−D/2, −E/2) &nbsp;|&nbsp; Radius = √[(D/2)² + (E/2)² − F]<br>
+      Example: x² + y² − 6x + 4y − 12 = 0 → D=−6, E=4, F=−12<br>
+      Center = (3, −2) &nbsp;|&nbsp; r = √[9 + 4 + 12] = √25 = 5
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 8 ══════════════ -->
+<section class="section" id="s8">
+  <div class="section-heading"><span class="section-num">08 /</span> Parabola</div>
+  <p class="section-desc">Vertex · Focus · Directrix · Axis of Symmetry · Latus Rectum · Opening Direction</p>
+
+  <!-- WHAT IS A PARABOLA -->
+  <div class="card card-gold">
+    <div class="card-title">🪄 What Is a Parabola?</div>
+    <p>A <strong>parabola</strong> is the set of all points in a plane that are <em>equidistant</em> from a fixed point called the <strong>focus</strong> and a fixed line called the <strong>directrix</strong>. That equal distance is called <strong>p</strong> (or sometimes <em>a</em> or <em>c</em>).</p>
+    <div class="formula">distance from point to Focus = distance from point to Directrix</div>
+    <ul class="def-list">
+      <li><span class="term">Vertex (V)</span><span class="def">The turning point of the parabola — the point exactly halfway between the focus and directrix. It's the "tip" of the curve.</span></li>
+      <li><span class="term">Focus (F)</span><span class="def">A fixed point inside the curve, at distance <strong>p</strong> from the vertex. The parabola wraps around it.</span></li>
+      <li><span class="term">Directrix</span><span class="def">A fixed line outside the curve, also at distance <strong>p</strong> from the vertex. Perpendicular to the axis of symmetry.</span></li>
+      <li><span class="term">p (focal distance)</span><span class="def">The distance from the vertex to the focus (and from the vertex to the directrix). Also written as <em>a</em> in some books.</span></li>
+      <li><span class="term">Axis of Symmetry (AOS)</span><span class="def">The line passing through the vertex and focus. Divides the parabola into two mirror-image halves.</span></li>
+      <li><span class="term">Latus Rectum (LR)</span><span class="def">The chord through the focus, perpendicular to the axis of symmetry. Its length is always <strong>|4p|</strong>.</span></li>
+      <li><span class="term">Endpoints of LR</span><span class="def">The two points where the latus rectum intersects the parabola. Each is at distance <strong>|2p|</strong> from the focus, on either side.</span></li>
+      <li><span class="term">Principal Axis</span><span class="def">Same as the Axis of Symmetry — the line the parabola is symmetric about. For vertical parabolas it's a vertical line; for horizontal it's a horizontal line.</span></li>
+    </ul>
+  </div>
+
+  <!-- THE FOUR ORIENTATIONS -->
+  <div class="card card-blue">
+    <div class="card-title">🧭 The Four Orientations — Vertex at Origin</div>
+    <p>When the vertex is at the <strong>origin (0, 0)</strong>, the four standard equations are:</p>
+    <table class="reviewer-table">
+      <thead><tr><th>Opening</th><th>Equation</th><th>Focus</th><th>Directrix</th><th>AOS</th><th>LR length</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>⬆ Upward</td>
+          <td><code>x² = 4py</code></td>
+          <td>(0, p)</td>
+          <td>y = −p</td>
+          <td>x = 0 (y-axis)</td>
+          <td>|4p|</td>
+        </tr>
+        <tr>
+          <td>⬇ Downward</td>
+          <td><code>x² = −4py</code></td>
+          <td>(0, −p)</td>
+          <td>y = p</td>
+          <td>x = 0 (y-axis)</td>
+          <td>|4p|</td>
+        </tr>
+        <tr>
+          <td>➡ Right</td>
+          <td><code>y² = 4px</code></td>
+          <td>(p, 0)</td>
+          <td>x = −p</td>
+          <td>y = 0 (x-axis)</td>
+          <td>|4p|</td>
+        </tr>
+        <tr>
+          <td>⬅ Left</td>
+          <td><code>y² = −4px</code></td>
+          <td>(−p, 0)</td>
+          <td>x = p</td>
+          <td>y = 0 (x-axis)</td>
+          <td>|4p|</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>Which variable is squared?</strong><br>
+      x² = parabola opens <strong>up or down</strong> (vertical axis)<br>
+      y² = parabola opens <strong>left or right</strong> (horizontal axis)<br><br>
+      <strong>Which way does it open?</strong><br>
+      Positive coefficient of 4p → opens UP (x²) or RIGHT (y²)<br>
+      Negative coefficient → opens DOWN (x²) or LEFT (y²)
+    </div>
+  </div>
+
+  <!-- VERTEX NOT AT ORIGIN -->
+  <div class="card card-green">
+    <div class="card-title">📍 Vertex NOT at Origin — General Standard Form</div>
+    <p>When the vertex is at <strong>(h, k)</strong>, just shift everything by (h, k):</p>
+    <table class="reviewer-table">
+      <thead><tr><th>Opening</th><th>Equation</th><th>Focus</th><th>Directrix</th><th>AOS</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>⬆ Upward</td>
+          <td><code>(x−h)² = 4p(y−k)</code></td>
+          <td>(h, k+p)</td>
+          <td>y = k−p</td>
+          <td>x = h</td>
+        </tr>
+        <tr>
+          <td>⬇ Downward</td>
+          <td><code>(x−h)² = −4p(y−k)</code></td>
+          <td>(h, k−p)</td>
+          <td>y = k+p</td>
+          <td>x = h</td>
+        </tr>
+        <tr>
+          <td>➡ Right</td>
+          <td><code>(y−k)² = 4p(x−h)</code></td>
+          <td>(h+p, k)</td>
+          <td>x = h−p</td>
+          <td>y = k</td>
+        </tr>
+        <tr>
+          <td>⬅ Left</td>
+          <td><code>(y−k)² = −4p(x−h)</code></td>
+          <td>(h−p, k)</td>
+          <td>x = h+p</td>
+          <td>y = k</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>Pattern for Focus:</strong> The focus is always <em>p units away from the vertex in the opening direction</em>.<br>
+      Opens up → add p to k. Opens right → add p to h. Opens down → subtract p from k. Opens left → subtract p from h.
+    </div>
+    <div class="warn-box">
+      <strong>p is always positive!</strong> The sign in the equation (±4p) tells you the direction, but p itself is a positive number. Always extract p as a positive value, then apply direction separately.
+    </div>
+  </div>
+
+  <!-- HOW TO GET EACH PART -->
+  <div class="card card-red">
+    <div class="card-title">🔑 How to Extract Every Part From an Equation</div>
+    <ol class="steps">
+      <li><strong>Identify which variable is squared.</strong> Squared x → vertical parabola (up/down). Squared y → horizontal (left/right).</li>
+      <li><strong>Read the vertex (h, k)</strong> from the equation. Remember: (x−h)² and (y−k)² — flip the signs.</li>
+      <li><strong>Find 4p.</strong> The coefficient on the right side (the non-squared side) equals 4p. Solve: p = that number ÷ 4. If negative, note the direction but p = |value ÷ 4|.</li>
+      <li><strong>Determine opening direction</strong> from the sign: positive → up or right; negative → down or left.</li>
+      <li><strong>Find the focus</strong> by moving p units from vertex in the opening direction.</li>
+      <li><strong>Find the directrix</strong> by moving p units from vertex in the opposite direction.</li>
+      <li><strong>Write the AOS (Principal Axis).</strong> Vertical parabola: x = h. Horizontal: y = k.</li>
+      <li><strong>Find endpoints of latus rectum.</strong> The LR passes through the focus, perpendicular to the AOS, with half-length |2p| on each side. So endpoints are ±2p from the focus, perpendicular to the axis.</li>
+    </ol>
+  </div>
+
+  <!-- LATUS RECTUM DETAIL -->
+  <div class="card card-purple">
+    <div class="card-title">📐 Latus Rectum — Full Details</div>
+    <p>The <strong>Latus Rectum</strong> (Latin: "straight side") is the chord of the parabola that:</p>
+    <ul class="def-list">
+      <li><span class="term">Passes through</span><span class="def">The <strong>focus</strong></span></li>
+      <li><span class="term">Direction</span><span class="def">Perpendicular to the axis of symmetry</span></li>
+      <li><span class="term">Length</span><span class="def"><strong>|4p|</strong> — always. This is one of the most tested facts.</span></li>
+      <li><span class="term">Each half</span><span class="def"><strong>|2p|</strong> on each side of the focus</span></li>
+    </ul>
+    <div class="shortcut-box">
+      <strong>Finding endpoints of LR:</strong><br>
+      For <strong>vertical</strong> parabola (focus at (h, k±p)): endpoints are <strong>(h ± 2p, k±p)</strong> — same y as focus, ±2p in x.<br>
+      For <strong>horizontal</strong> parabola (focus at (h±p, k)): endpoints are <strong>(h±p, k ± 2p)</strong> — same x as focus, ±2p in y.
+    </div>
+    <div class="two-col">
+      <div class="mini-card">
+        <strong>Upward: x² = 4py</strong><br>
+        Focus: (0, p)<br>
+        LR endpoints: (−2p, p) and (2p, p)<br>
+        LR length: 4p
+      </div>
+      <div class="mini-card">
+        <strong>Rightward: y² = 4px</strong><br>
+        Focus: (p, 0)<br>
+        LR endpoints: (p, −2p) and (p, 2p)<br>
+        LR length: 4p
+      </div>
+    </div>
+  </div>
+
+  <!-- VISUAL DIAGRAMS -->
+  <div class="card">
+    <div class="card-title">👁️ Visual Diagrams — All Four Orientations</div>
+    <div class="graph-wrap">
+      <svg viewBox="0 0 580 300" width="580" height="300">
+
+        <!-- ── PANEL 1: UPWARD ── -->
+        <rect x="5" y="5" width="130" height="145" fill="#f5f0e8" stroke="#d4c9a8" rx="3"/>
+        <!-- Axes -->
+        <line x1="5" y1="100" x2="135" y2="100" stroke="#bbb" stroke-width="0.8"/>
+        <line x1="70" y1="5" x2="70" y2="150" stroke="#bbb" stroke-width="0.8"/>
+        <!-- Parabola upward (vertex at 70,110) opening up -->
+        <path d="M 25,148 Q 70,40 115,148" fill="none" stroke="#1d4e89" stroke-width="2.5"/>
+        <!-- Vertex -->
+        <circle cx="70" cy="110" r="3.5" fill="#b5451b"/>
+        <text x="74" y="122" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#b5451b">V(h,k)</text>
+        <!-- Focus (above vertex) -->
+        <circle cx="70" cy="85" r="3" fill="#2d6a4f"/>
+        <text x="74" y="83" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#2d6a4f">F(h,k+p)</text>
+        <!-- Directrix (below vertex) -->
+        <line x1="10" y1="132" x2="130" y2="132" stroke="#b5451b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="10" y="143" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#b5451b">y=k−p</text>
+        <!-- AOS -->
+        <line x1="70" y1="10" x2="70" y2="148" stroke="#7b4fa6" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- p-distance marks -->
+        <line x1="75" y1="85" x2="75" y2="110" stroke="#888" stroke-width="0.8"/>
+        <text x="77" y="100" font-family="JetBrains Mono,monospace" font-size="7" fill="#7a7060">p</text>
+        <!-- Latus Rectum -->
+        <line x1="45" y1="85" x2="95" y2="85" stroke="#c9a44a" stroke-width="1.8"/>
+        <circle cx="45" cy="85" r="2.5" fill="#c9a44a"/>
+        <circle cx="95" cy="85" r="2.5" fill="#c9a44a"/>
+        <!-- Label -->
+        <text x="70" y="162" font-family="Source Serif 4,serif" font-size="10" fill="#1d4e89" text-anchor="middle" font-weight="600">⬆ Upward</text>
+        <text x="70" y="174" font-family="JetBrains Mono,monospace" font-size="8" fill="#7a7060" text-anchor="middle">x²=4py (origin)</text>
+
+        <!-- ── PANEL 2: DOWNWARD ── -->
+        <rect x="148" y="5" width="130" height="145" fill="#f5f0e8" stroke="#d4c9a8" rx="3"/>
+        <line x1="148" y1="60" x2="278" y2="60" stroke="#bbb" stroke-width="0.8"/>
+        <line x1="213" y1="5" x2="213" y2="150" stroke="#bbb" stroke-width="0.8"/>
+        <!-- Parabola downward (vertex at 213,45) -->
+        <path d="M 168,10 Q 213,120 258,10" fill="none" stroke="#1d4e89" stroke-width="2.5"/>
+        <!-- Vertex -->
+        <circle cx="213" cy="45" r="3.5" fill="#b5451b"/>
+        <text x="217" y="44" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#b5451b">V</text>
+        <!-- Focus (below vertex) -->
+        <circle cx="213" cy="70" r="3" fill="#2d6a4f"/>
+        <text x="217" y="75" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#2d6a4f">F(h,k−p)</text>
+        <!-- Directrix (above vertex) -->
+        <line x1="153" y1="22" x2="273" y2="22" stroke="#b5451b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="155" y="19" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#b5451b">y=k+p</text>
+        <!-- AOS -->
+        <line x1="213" y1="8" x2="213" y2="148" stroke="#7b4fa6" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Latus Rectum -->
+        <line x1="188" y1="70" x2="238" y2="70" stroke="#c9a44a" stroke-width="1.8"/>
+        <circle cx="188" cy="70" r="2.5" fill="#c9a44a"/>
+        <circle cx="238" cy="70" r="2.5" fill="#c9a44a"/>
+        <text x="213" y="162" font-family="Source Serif 4,serif" font-size="10" fill="#1d4e89" text-anchor="middle" font-weight="600">⬇ Downward</text>
+        <text x="213" y="174" font-family="JetBrains Mono,monospace" font-size="8" fill="#7a7060" text-anchor="middle">x²=−4py</text>
+
+        <!-- ── PANEL 3: RIGHTWARD ── -->
+        <rect x="291" y="5" width="130" height="145" fill="#f5f0e8" stroke="#d4c9a8" rx="3"/>
+        <line x1="291" y1="77" x2="421" y2="77" stroke="#bbb" stroke-width="0.8"/>
+        <line x1="305" y1="5" x2="305" y2="150" stroke="#bbb" stroke-width="0.8"/>
+        <!-- Parabola rightward (vertex at 305,77) -->
+        <path d="M 305,20 Q 420,77 305,134" fill="none" stroke="#1d4e89" stroke-width="2.5"/>
+        <!-- Vertex -->
+        <circle cx="305" cy="77" r="3.5" fill="#b5451b"/>
+        <text x="308" y="90" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#b5451b">V</text>
+        <!-- Focus (right of vertex) -->
+        <circle cx="340" cy="77" r="3" fill="#2d6a4f"/>
+        <text x="344" y="73" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#2d6a4f">F(h+p,k)</text>
+        <!-- Directrix (left of vertex) -->
+        <line x1="275" y1="10" x2="275" y2="148" stroke="#b5451b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="261" y="48" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#b5451b" transform="rotate(-90,261,48)">x=h−p</text>
+        <!-- AOS -->
+        <line x1="291" y1="77" x2="420" y2="77" stroke="#7b4fa6" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Latus Rectum -->
+        <line x1="340" y1="50" x2="340" y2="104" stroke="#c9a44a" stroke-width="1.8"/>
+        <circle cx="340" cy="50" r="2.5" fill="#c9a44a"/>
+        <circle cx="340" cy="104" r="2.5" fill="#c9a44a"/>
+        <text x="356" y="162" font-family="Source Serif 4,serif" font-size="10" fill="#1d4e89" text-anchor="middle" font-weight="600">➡ Right</text>
+        <text x="356" y="174" font-family="JetBrains Mono,monospace" font-size="8" fill="#7a7060" text-anchor="middle">y²=4px</text>
+
+        <!-- ── PANEL 4: LEFTWARD ── -->
+        <rect x="434" y="5" width="130" height="145" fill="#f5f0e8" stroke="#d4c9a8" rx="3"/>
+        <line x1="434" y1="77" x2="564" y2="77" stroke="#bbb" stroke-width="0.8"/>
+        <line x1="560" y1="5" x2="560" y2="150" stroke="#bbb" stroke-width="0.8"/>
+        <!-- Parabola leftward (vertex at 560,77) -->
+        <path d="M 560,20 Q 445,77 560,134" fill="none" stroke="#1d4e89" stroke-width="2.5"/>
+        <!-- Vertex -->
+        <circle cx="560" cy="77" r="3.5" fill="#b5451b"/>
+        <text x="540" y="93" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#b5451b">V</text>
+        <!-- Focus (left of vertex) -->
+        <circle cx="525" cy="77" r="3" fill="#2d6a4f"/>
+        <text x="434" y="73" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#2d6a4f">F(h−p,k)</text>
+        <!-- Directrix (right of vertex) -->
+        <line x1="578" y1="10" x2="578" y2="148" stroke="#b5451b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="574" y="25" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#b5451b">x=h+p</text>
+        <!-- AOS -->
+        <line x1="434" y1="77" x2="564" y2="77" stroke="#7b4fa6" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Latus Rectum -->
+        <line x1="525" y1="50" x2="525" y2="104" stroke="#c9a44a" stroke-width="1.8"/>
+        <circle cx="525" cy="50" r="2.5" fill="#c9a44a"/>
+        <circle cx="525" cy="104" r="2.5" fill="#c9a44a"/>
+        <text x="499" y="162" font-family="Source Serif 4,serif" font-size="10" fill="#1d4e89" text-anchor="middle" font-weight="600">⬅ Left</text>
+        <text x="499" y="174" font-family="JetBrains Mono,monospace" font-size="8" fill="#7a7060" text-anchor="middle">y²=−4px</text>
+
+        <!-- LEGEND -->
+        <circle cx="30" cy="220" r="4" fill="#b5451b"/>
+        <text x="38" y="224" font-family="JetBrains Mono,monospace" font-size="9" fill="#b5451b">Vertex</text>
+        <circle cx="115" cy="220" r="4" fill="#2d6a4f"/>
+        <text x="123" y="224" font-family="JetBrains Mono,monospace" font-size="9" fill="#2d6a4f">Focus</text>
+        <line x1="205" y1="220" x2="235" y2="220" stroke="#b5451b" stroke-width="2" stroke-dasharray="4,2"/>
+        <text x="240" y="224" font-family="JetBrains Mono,monospace" font-size="9" fill="#b5451b">Directrix</text>
+        <line x1="335" y1="220" x2="365" y2="220" stroke="#c9a44a" stroke-width="2.5"/>
+        <text x="370" y="224" font-family="JetBrains Mono,monospace" font-size="9" fill="#c9a44a">Latus Rectum</text>
+        <line x1="475" y1="220" x2="505" y2="220" stroke="#7b4fa6" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="510" y="224" font-family="JetBrains Mono,monospace" font-size="9" fill="#7b4fa6">Axis of Symmetry</text>
+
+        <!-- SUBTITLE -->
+        <text x="290" y="250" font-family="JetBrains Mono,monospace" font-size="8" fill="#7a7060" text-anchor="middle">p = focal distance (vertex to focus) · LR length = |4p|</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- WORKED EXAMPLES -->
+  <div class="card card-green">
+    <div class="card-title">✏️ Worked Examples — Extracting All Parts</div>
+    <div class="ex-tabs">
+      <button class="ex-tab-btn active" onclick="switchEx(this,'g8','e8a')">Upward (origin)</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g8','e8b')">Rightward (origin)</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g8','e8c')">Upward (shifted)</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g8','e8d')">Leftward (shifted)</button>
+      <button class="ex-tab-btn" onclick="switchEx(this,'g8','e8e')">Find equation</button>
+    </div>
+
+    <div class="ex-panel active" id="e8a" data-group="g8">
+      <div class="example-label">x² = 12y — Find vertex, focus, directrix, AOS, LR endpoints</div>
+      <strong>Form:</strong> x² = 4py → 4p = 12 → <strong>p = 3</strong><br>
+      Squared variable: x² → opens <strong>upward</strong><br>
+      Coefficient positive (+12) → confirms opens UP<br><br>
+      <strong>Vertex:</strong> (0, 0) — at the origin<br>
+      <strong>Focus:</strong> (0, p) = <strong>(0, 3)</strong><br>
+      <strong>Directrix:</strong> y = −p = <strong>y = −3</strong><br>
+      <strong>AOS / Principal Axis:</strong> <strong>x = 0</strong> (the y-axis)<br>
+      <strong>LR length:</strong> |4p| = |12| = <strong>12 units</strong><br>
+      <strong>LR endpoints:</strong> (−2p, p) and (2p, p) = <strong>(−6, 3) and (6, 3)</strong>
+      <div class="formula">x² = 12y → p=3, opens up, Focus(0,3), Directrix: y=−3, LR: 12 units</div>
+    </div>
+
+    <div class="ex-panel" id="e8b" data-group="g8">
+      <div class="example-label">y² = −8x — Find all parts</div>
+      <strong>Form:</strong> y² = −4px → 4p = 8 → <strong>p = 2</strong><br>
+      Squared variable: y² → opens <strong>left or right</strong><br>
+      Coefficient negative (−8) → opens <strong>LEFT</strong><br><br>
+      <strong>Vertex:</strong> (0, 0)<br>
+      <strong>Focus:</strong> (−p, 0) = <strong>(−2, 0)</strong><br>
+      <strong>Directrix:</strong> x = p = <strong>x = 2</strong><br>
+      <strong>AOS / Principal Axis:</strong> <strong>y = 0</strong> (the x-axis)<br>
+      <strong>LR length:</strong> |4p| = <strong>8 units</strong><br>
+      <strong>LR endpoints:</strong> (−p, ±2p) = <strong>(−2, −4) and (−2, 4)</strong>
+      <div class="formula">y² = −8x → p=2, opens LEFT, Focus(−2,0), Directrix: x=2</div>
+    </div>
+
+    <div class="ex-panel" id="e8c" data-group="g8">
+      <div class="example-label">(x − 2)² = 8(y + 3) — Vertex NOT at origin</div>
+      Compare to (x−h)² = 4p(y−k): → h=2, k=−3, 4p=8 → <strong>p=2</strong><br>
+      Squared variable: x² → vertical axis. Positive coefficient → opens <strong>UP</strong><br><br>
+      <strong>Vertex:</strong> (h, k) = <strong>(2, −3)</strong><br>
+      <strong>Focus:</strong> (h, k+p) = (2, −3+2) = <strong>(2, −1)</strong><br>
+      <strong>Directrix:</strong> y = k−p = −3−2 = <strong>y = −5</strong><br>
+      <strong>AOS / Principal Axis:</strong> <strong>x = 2</strong><br>
+      <strong>LR length:</strong> |4p| = <strong>8 units</strong><br>
+      <strong>LR endpoints:</strong> (h±2p, k+p) = (2±4, −1) = <strong>(−2, −1) and (6, −1)</strong>
+    </div>
+
+    <div class="ex-panel" id="e8d" data-group="g8">
+      <div class="example-label">(y + 1)² = −12(x − 3)</div>
+      Compare to (y−k)² = −4p(x−h): → h=3, k=−1, 4p=12 → <strong>p=3</strong><br>
+      Squared: y² → horizontal. Negative coefficient → opens <strong>LEFT</strong><br><br>
+      <strong>Vertex:</strong> <strong>(3, −1)</strong><br>
+      <strong>Focus:</strong> (h−p, k) = (3−3, −1) = <strong>(0, −1)</strong><br>
+      <strong>Directrix:</strong> x = h+p = 3+3 = <strong>x = 6</strong><br>
+      <strong>AOS / Principal Axis:</strong> <strong>y = −1</strong><br>
+      <strong>LR length:</strong> |4p| = <strong>12 units</strong><br>
+      <strong>LR endpoints:</strong> (h−p, k±2p) = (0, −1±6) = <strong>(0, 5) and (0, −7)</strong>
+    </div>
+
+    <div class="ex-panel" id="e8e" data-group="g8">
+      <div class="example-label">Write the equation: Vertex (1, 2), Focus (1, 5)</div>
+      Focus is directly <strong>above</strong> the vertex → opens <strong>UP</strong><br>
+      p = distance from vertex to focus = |5−2| = <strong>3</strong><br>
+      Equation form: (x−h)² = 4p(y−k)<br>
+      <div class="formula">(x−1)² = 4(3)(y−2) → (x−1)² = 12(y−2)</div>
+      <strong>Check:</strong> Directrix = y = k−p = 2−3 = −1<br>
+      AOS: x = 1 &nbsp;|&nbsp; LR length: 12 &nbsp;|&nbsp; LR endpoints: (1±6, 5) = (−5, 5) and (7, 5)
+    </div>
+  </div>
+
+  <!-- GENERAL FORM → STANDARD FORM -->
+  <div class="card card-red">
+    <div class="card-title">🔁 General Form → Standard Form (Complete the Square)</div>
+    <p>Parabolas in General Form look like <strong>Ax² + Dx + Ey + F = 0</strong> (vertical) or <strong>Cy² + Dx + Ey + F = 0</strong> (horizontal). Convert by completing the square on the squared term.</p>
+    <ol class="steps">
+      <li>Isolate the squared-variable terms on one side and the linear terms on the other</li>
+      <li>Complete the square on the squared variable (group it, add (half the coeff)² to both sides)</li>
+      <li>Factor into a perfect square: (x−h)² or (y−k)²</li>
+      <li>Divide/simplify until it matches (x−h)²=4p(y−k) or (y−k)²=4p(x−h)</li>
+    </ol>
+    <button class="example-toggle" onclick="toggleEx(this)"></button>
+    <div class="example-body">
+      <div class="example-label">Convert: x² − 4x − 8y + 20 = 0</div>
+      Move non-x² terms: x² − 4x = 8y − 20<br>
+      Complete the square: (x² − 4x + 4) = 8y − 20 + 4<br>
+      <div class="formula">(x − 2)² = 8y − 16 = 8(y − 2)</div>
+      Standard form: (x−2)² = 8(y−2)<br>
+      → h=2, k=2, 4p=8, <strong>p=2</strong>, opens <strong>UP</strong><br>
+      Vertex: (2,2) | Focus: (2,4) | Directrix: y=0 | AOS: x=2 | LR: 8 units
+    </div>
+  </div>
+
+  <!-- SHORTCUT CHEAT SHEET -->
+  <div class="card">
+    <div class="card-title">⚡ Full Parabola Cheat Sheet</div>
+    <table class="reviewer-table">
+      <thead><tr><th>Property</th><th>Vertical (x² form)</th><th>Horizontal (y² form)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Equation (origin)</strong></td><td>x² = ±4py</td><td>y² = ±4px</td></tr>
+        <tr><td><strong>Equation (shifted)</strong></td><td>(x−h)² = ±4p(y−k)</td><td>(y−k)² = ±4p(x−h)</td></tr>
+        <tr><td><strong>Vertex</strong></td><td>(h, k)</td><td>(h, k)</td></tr>
+        <tr><td><strong>Opens +</strong></td><td>Upward ⬆</td><td>Rightward ➡</td></tr>
+        <tr><td><strong>Opens −</strong></td><td>Downward ⬇</td><td>Leftward ⬅</td></tr>
+        <tr><td><strong>Focus (up/right)</strong></td><td>(h, k+p)</td><td>(h+p, k)</td></tr>
+        <tr><td><strong>Focus (down/left)</strong></td><td>(h, k−p)</td><td>(h−p, k)</td></tr>
+        <tr><td><strong>Directrix (up/right)</strong></td><td>y = k−p</td><td>x = h−p</td></tr>
+        <tr><td><strong>Directrix (down/left)</strong></td><td>y = k+p</td><td>x = h+p</td></tr>
+        <tr><td><strong>Axis of Symmetry</strong></td><td>x = h (vertical line)</td><td>y = k (horizontal line)</td></tr>
+        <tr><td><strong>LR length</strong></td><td>|4p|</td><td>|4p|</td></tr>
+        <tr><td><strong>LR endpoints</strong></td><td>(h±2p, k±p)</td><td>(h±p, k±2p)</td></tr>
+      </tbody>
+    </table>
+    <div class="shortcut-box">
+      <strong>The master shortcut — 3 things to find p:</strong><br>
+      1. Write the equation in standard form<br>
+      2. Match the right side to 4p → divide by 4 to get p<br>
+      3. Then everything else follows: focus = vertex ± p, directrix = vertex ∓ p, LR = 4p, LR endpoints = focus ± 2p (perpendicular direction)
+    </div>
+    <div class="warn-box">
+      <strong>Common mistakes:</strong><br>
+      • Confusing which direction to shift focus (always INTO the curve, away from directrix)<br>
+      • Forgetting to flip signs when reading vertex from equation<br>
+      • Using p instead of 2p for LR endpoint distance<br>
+      • Forgetting to divide by 4 when finding p from 4p
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 9 ══════════════ -->
+<section class="section" id="s9">
+  <div class="section-heading"><span class="section-num">09 /</span> Practice Problems</div>
+  <p class="section-desc">Circles &amp; Parabolas — tap any problem to reveal the full solution</p>
+
+  <!-- FILTER -->
+  <div class="prob-filter">
+    <button class="filter-btn active" onclick="filterProbs(this,'all')">All (22)</button>
+    <button class="filter-btn" onclick="filterProbs(this,'circ')">⭕ Circles</button>
+    <button class="filter-btn" onclick="filterProbs(this,'para')">🪄 Parabolas</button>
+    <button class="filter-btn" onclick="filterProbs(this,'hard')">🔥 3-Point / Hard</button>
+  </div>
+  <div class="prob-score">Revealed: <span id="revealCount">0</span> / 22</div>
+
+  <div class="prob-grid" id="probGrid">
+
+    <!-- ══ CIRCLE PROBLEMS ══ -->
+
+    <!-- C1 -->
+    <div class="prob-item" data-type="circ">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-01</span>
+        <div class="prob-q">Find the center and radius of <span class="eq">(x − 3)² + (y + 5)² = 49</span></div>
+        <span class="prob-tag circ">Circle</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Compare to <span class="eq">(x−h)² + (y−k)² = r²</span><br>
+          <span class="step-line">h = 3, k = −5 (flip the signs!), r² = 49 → r = 7</span>
+          <div class="ans-final">Center: (3, −5) &nbsp;|&nbsp; Radius: 7</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C2 -->
+    <div class="prob-item" data-type="circ">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-02</span>
+        <div class="prob-q">Write the equation of a circle with center <span class="eq">(−2, 4)</span> and radius <span class="eq">6</span>.</div>
+        <span class="prob-tag circ">Circle</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Standard form: (x−h)² + (y−k)² = r²<br>
+          <span class="step-line">Substitute h=−2, k=4, r=6:</span>
+          <div class="formula">(x − (−2))² + (y − 4)² = 36</div>
+          <div class="ans-final">(x + 2)² + (y − 4)² = 36</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C3 -->
+    <div class="prob-item" data-type="circ">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-03</span>
+        <div class="prob-q">Convert to standard form and find center &amp; radius: <span class="eq">x² + y² − 4x + 6y − 12 = 0</span></div>
+        <span class="prob-tag circ">Circle</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Group: (x² − 4x) + (y² + 6y) = 12<br>
+          <span class="step-line">Complete x: add (4/2)²=4 → (x−2)²</span>
+          <span class="step-line">Complete y: add (6/2)²=9 → (y+3)²</span>
+          <div class="formula">(x−2)² + (y+3)² = 12 + 4 + 9 = 25</div>
+          <div class="ans-final">Center: (2, −3) &nbsp;|&nbsp; Radius: 5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C4 -->
+    <div class="prob-item" data-type="circ">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-04</span>
+        <div class="prob-q">Find the equation of a circle with diameter endpoints <span class="eq">(1, 3)</span> and <span class="eq">(7, 11)</span>.</div>
+        <span class="prob-tag circ">Circle</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Center = midpoint = ((1+7)/2, (3+11)/2) = <strong>(4, 7)</strong><br>
+          <span class="step-line">Radius = distance from (4,7) to (7,11):</span>
+          <div class="formula">r = √[(7−4)² + (11−7)²] = √[9+16] = √25 = 5</div>
+          <div class="ans-final">(x − 4)² + (y − 7)² = 25</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C5 -->
+    <div class="prob-item" data-type="circ">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-05</span>
+        <div class="prob-q">Convert to standard form: <span class="eq">x² + y² + 10x − 2y + 1 = 0</span></div>
+        <span class="prob-tag circ">Circle</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Group: (x²+10x) + (y²−2y) = −1<br>
+          <span class="step-line">Complete x: add (10/2)²=25 → (x+5)²</span>
+          <span class="step-line">Complete y: add (2/2)²=1 → (y−1)²</span>
+          <div class="formula">(x+5)² + (y−1)² = −1 + 25 + 1 = 25</div>
+          <div class="ans-final">Center: (−5, 1) &nbsp;|&nbsp; Radius: 5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C6 -->
+    <div class="prob-item" data-type="circ">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-06</span>
+        <div class="prob-q">A circle has center <span class="eq">(0, 0)</span> and passes through <span class="eq">(5, 12)</span>. Write its equation.</div>
+        <span class="prob-tag circ">Circle</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          r = distance from (0,0) to (5,12):<br>
+          <div class="formula">r = √[5² + 12²] = √[25 + 144] = √169 = 13</div>
+          Center at origin → x² + y² = r²
+          <div class="ans-final">x² + y² = 169</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C7 — 3-point circle -->
+    <div class="prob-item" data-type="hard">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-07</span>
+        <div class="prob-q">Find the equation of the circle passing through <span class="eq">(1, 0)</span>, <span class="eq">(−1, 0)</span>, and <span class="eq">(0, 1)</span>.</div>
+        <span class="prob-tag hard">3 Points</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Use general form x²+y²+Dx+Ey+F=0. Substitute each point:<br>
+          <span class="step-line"><strong>Point (1,0):</strong> 1 + 0 + D + 0 + F = 0 → D + F = −1 &nbsp;…①</span>
+          <span class="step-line"><strong>Point (−1,0):</strong> 1 + 0 − D + 0 + F = 0 → −D + F = −1 &nbsp;…②</span>
+          <span class="step-line"><strong>Point (0,1):</strong> 0 + 1 + 0 + E + F = 0 → E + F = −1 &nbsp;…③</span>
+          <span class="step-line">①+② : 2F = −2 → <strong>F = −1</strong></span>
+          <span class="step-line">Sub into ①: D−1=−1 → <strong>D = 0</strong></span>
+          <span class="step-line">Sub into ③: E−1=−1 → <strong>E = 0</strong></span>
+          <div class="formula">x² + y² − 1 = 0 → x² + y² = 1</div>
+          <div class="ans-final">Center: (0, 0) &nbsp;|&nbsp; Radius: 1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C8 — 3-point circle -->
+    <div class="prob-item" data-type="hard">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-08</span>
+        <div class="prob-q">Find the equation of the circle passing through <span class="eq">(2, 0)</span>, <span class="eq">(0, 4)</span>, and <span class="eq">(−2, 2)</span>.</div>
+        <span class="prob-tag hard">3 Points</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Substitute into x²+y²+Dx+Ey+F=0:<br>
+          <span class="step-line"><strong>(2,0):</strong> 4 + 2D + F = 0 → 2D + F = −4 &nbsp;…①</span>
+          <span class="step-line"><strong>(0,4):</strong> 16 + 4E + F = 0 → 4E + F = −16 &nbsp;…②</span>
+          <span class="step-line"><strong>(−2,2):</strong> 4+4−2D+2E+F=0 → −2D+2E+F=−8 &nbsp;…③</span>
+          <span class="step-line">①−③: 4D−2E = 4 → 2D−E = 2 &nbsp;…④</span>
+          <span class="step-line">From ①: F = −4−2D. Sub into ②: 4E+(−4−2D)=−16 → 4E−2D=−12 → 2E−D=−6 &nbsp;…⑤</span>
+          <span class="step-line">From ④: D=(2+E)/2. Sub into ⑤: 2E−(2+E)/2=−6 → 4E−2−E=−12 → 3E=−10 → <strong>E=−10/3</strong></span>
+          <span class="step-line">D=(2+(−10/3))/2=(−4/3)/2=<strong>−2/3</strong>, F=−4−2(−2/3)=−4+4/3=<strong>−8/3</strong></span>
+          <div class="formula">x²+y²−(2/3)x−(10/3)y−8/3=0 → multiply by 3:<br>3x²+3y²−2x−10y−8=0</div>
+          Complete the square: (x−1/3)²+(y−5/3)²=1/9+25/9+8/3=1/9+25/9+24/9=50/9<br>
+          <div class="ans-final">Center: (1/3, 5/3) &nbsp;|&nbsp; r = √(50/9) = 5√2/3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C9 — 3-point circle (cleaner) -->
+    <div class="prob-item" data-type="hard">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-09</span>
+        <div class="prob-q">Find the circle through <span class="eq">(0, 0)</span>, <span class="eq">(4, 0)</span>, and <span class="eq">(0, 6)</span>.</div>
+        <span class="prob-tag hard">3 Points</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Substitute into x²+y²+Dx+Ey+F=0:<br>
+          <span class="step-line"><strong>(0,0):</strong> F = 0 → <strong>F = 0</strong></span>
+          <span class="step-line"><strong>(4,0):</strong> 16 + 4D + 0 + 0 = 0 → D = <strong>−4</strong></span>
+          <span class="step-line"><strong>(0,6):</strong> 36 + 0 + 6E + 0 = 0 → E = <strong>−6</strong></span>
+          <div class="formula">x² + y² − 4x − 6y = 0</div>
+          Complete the square: (x−2)²+(y−3)²=4+9=13<br>
+          <div class="ans-final">Center: (2, 3) &nbsp;|&nbsp; Radius: √13</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C10 -->
+    <div class="prob-item" data-type="circ">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-10</span>
+        <div class="prob-q">Convert and find center &amp; radius: <span class="eq">2x² + 2y² − 8x + 12y − 24 = 0</span></div>
+        <span class="prob-tag circ">Circle</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Divide everything by 2 first: x²+y²−4x+6y−12=0<br>
+          <span class="step-line">Group: (x²−4x)+(y²+6y)=12</span>
+          <span class="step-line">Complete x: add 4 → (x−2)²</span>
+          <span class="step-line">Complete y: add 9 → (y+3)²</span>
+          <div class="formula">(x−2)² + (y+3)² = 12+4+9 = 25</div>
+          <div class="ans-final">Center: (2, −3) &nbsp;|&nbsp; Radius: 5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C11 — 3-point circle -->
+    <div class="prob-item" data-type="hard">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">C-11</span>
+        <div class="prob-q">Find the circle through <span class="eq">(1, 1)</span>, <span class="eq">(3, 1)</span>, and <span class="eq">(2, 3)</span>.</div>
+        <span class="prob-tag hard">3 Points</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Substitute into x²+y²+Dx+Ey+F=0:<br>
+          <span class="step-line"><strong>(1,1):</strong> 2 + D + E + F = 0 → D+E+F = −2 &nbsp;…①</span>
+          <span class="step-line"><strong>(3,1):</strong> 10 + 3D + E + F = 0 → 3D+E+F = −10 &nbsp;…②</span>
+          <span class="step-line"><strong>(2,3):</strong> 13 + 2D + 3E + F = 0 → 2D+3E+F = −13 &nbsp;…③</span>
+          <span class="step-line">②−①: 2D = −8 → <strong>D = −4</strong></span>
+          <span class="step-line">Sub D=−4 into ①: −4+E+F=−2 → E+F=2 &nbsp;…④</span>
+          <span class="step-line">Sub D=−4 into ③: −8+3E+F=−13 → 3E+F=−5 &nbsp;…⑤</span>
+          <span class="step-line">⑤−④: 2E=−7 → <strong>E=−7/2</strong>; F=2−(−7/2)=<strong>11/2</strong></span>
+          <div class="formula">x²+y²−4x−(7/2)y+11/2=0 → multiply by 2: 2x²+2y²−8x−7y+11=0</div>
+          Complete: (x−2)²+(y−7/4)²=4+49/16−11/2=64/16+49/16−88/16=<strong>25/16</strong>
+          <div class="ans-final">Center: (2, 7/4) &nbsp;|&nbsp; Radius: 5/4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PARABOLA PROBLEMS ══ -->
+
+    <!-- P1 -->
+    <div class="prob-item" data-type="para">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-01</span>
+        <div class="prob-q">For <span class="eq">x² = 20y</span>, find the vertex, focus, directrix, AOS, and endpoints of the latus rectum.</div>
+        <span class="prob-tag para">Parabola</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Form x²=4py → 4p=20 → <strong>p=5</strong>. Opens <strong>upward</strong> (positive, x² form).<br>
+          <span class="step-line"><strong>Vertex:</strong> (0, 0)</span>
+          <span class="step-line"><strong>Focus:</strong> (0, p) = (0, 5)</span>
+          <span class="step-line"><strong>Directrix:</strong> y = −5</span>
+          <span class="step-line"><strong>AOS:</strong> x = 0</span>
+          <span class="step-line"><strong>LR length:</strong> 4p = 20</span>
+          <div class="ans-final">LR endpoints: (−10, 5) and (10, 5)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="prob-item" data-type="para">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-02</span>
+        <div class="prob-q">For <span class="eq">y² = −16x</span>, identify all key parts including latus rectum endpoints.</div>
+        <span class="prob-tag para">Parabola</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Form y²=−4px → 4p=16 → <strong>p=4</strong>. y² form, negative → opens <strong>LEFT</strong>.<br>
+          <span class="step-line"><strong>Vertex:</strong> (0, 0)</span>
+          <span class="step-line"><strong>Focus:</strong> (−4, 0)</span>
+          <span class="step-line"><strong>Directrix:</strong> x = 4</span>
+          <span class="step-line"><strong>AOS / Principal Axis:</strong> y = 0 (the x-axis)</span>
+          <span class="step-line"><strong>LR length:</strong> 4p = 16</span>
+          <div class="ans-final">LR endpoints: (−4, −8) and (−4, 8)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="prob-item" data-type="para">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-03</span>
+        <div class="prob-q">Find all parts for <span class="eq">(x − 1)² = 8(y + 2)</span>.</div>
+        <span class="prob-tag para">Parabola</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Form (x−h)²=4p(y−k): h=1, k=−2, 4p=8 → <strong>p=2</strong>. Opens <strong>up</strong>.<br>
+          <span class="step-line"><strong>Vertex:</strong> (1, −2)</span>
+          <span class="step-line"><strong>Focus:</strong> (h, k+p) = (1, 0)</span>
+          <span class="step-line"><strong>Directrix:</strong> y = k−p = −2−2 = −4</span>
+          <span class="step-line"><strong>AOS:</strong> x = 1</span>
+          <span class="step-line"><strong>LR length:</strong> 8</span>
+          <div class="ans-final">LR endpoints: (1±4, 0) = (−3, 0) and (5, 0)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="prob-item" data-type="para">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-04</span>
+        <div class="prob-q">Find all parts for <span class="eq">(y + 3)² = −12(x − 2)</span>.</div>
+        <span class="prob-tag para">Parabola</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Form (y−k)²=−4p(x−h): h=2, k=−3, 4p=12 → <strong>p=3</strong>. Opens <strong>LEFT</strong>.<br>
+          <span class="step-line"><strong>Vertex:</strong> (2, −3)</span>
+          <span class="step-line"><strong>Focus:</strong> (h−p, k) = (−1, −3)</span>
+          <span class="step-line"><strong>Directrix:</strong> x = h+p = 5</span>
+          <span class="step-line"><strong>AOS / Principal Axis:</strong> y = −3</span>
+          <span class="step-line"><strong>LR length:</strong> 12</span>
+          <div class="ans-final">LR endpoints: (−1, −3±6) = (−1, −9) and (−1, 3)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="prob-item" data-type="para">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-05</span>
+        <div class="prob-q">Write the equation of the parabola with vertex <span class="eq">(0, 0)</span> and focus <span class="eq">(0, −3)</span>.</div>
+        <span class="prob-tag para">Parabola</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Focus is below vertex → opens <strong>downward</strong>. p=3.<br>
+          Form: x² = −4py<br>
+          <div class="formula">x² = −4(3)y = −12y</div>
+          Verify: directrix y=3 (above vertex), AOS x=0 ✓
+          <div class="ans-final">x² = −12y</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="prob-item" data-type="para">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-06</span>
+        <div class="prob-q">Convert to standard form and find all parts: <span class="eq">x² − 6x − 4y + 1 = 0</span></div>
+        <span class="prob-tag para">Parabola</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Isolate squared term: x²−6x = 4y−1<br>
+          <span class="step-line">Complete the square: (x²−6x+9) = 4y−1+9</span>
+          <div class="formula">(x−3)² = 4y + 8 = 4(y+2)</div>
+          h=3, k=−2, 4p=4 → <strong>p=1</strong>. Opens <strong>up</strong>.<br>
+          <span class="step-line"><strong>Vertex:</strong> (3, −2) &nbsp;|&nbsp; <strong>Focus:</strong> (3, −1)</span>
+          <span class="step-line"><strong>Directrix:</strong> y = −3 &nbsp;|&nbsp; <strong>AOS:</strong> x = 3</span>
+          <div class="ans-final">LR endpoints: (3±2, −1) = (1, −1) and (5, −1)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="prob-item" data-type="para">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-07</span>
+        <div class="prob-q">Convert to standard form: <span class="eq">y² + 8y − 4x + 20 = 0</span></div>
+        <span class="prob-tag para">Parabola</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Isolate y² terms: y²+8y = 4x−20<br>
+          <span class="step-line">Complete: (y²+8y+16) = 4x−20+16</span>
+          <div class="formula">(y+4)² = 4x − 4 = 4(x−1)</div>
+          h=1, k=−4, 4p=4 → <strong>p=1</strong>. Opens <strong>RIGHT</strong>.<br>
+          <span class="step-line"><strong>Vertex:</strong> (1, −4) &nbsp;|&nbsp; <strong>Focus:</strong> (2, −4)</span>
+          <span class="step-line"><strong>Directrix:</strong> x = 0 &nbsp;|&nbsp; <strong>AOS:</strong> y = −4</span>
+          <div class="ans-final">LR endpoints: (2, −4±2) = (2, −6) and (2, −2)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P8 — 3-point parabola -->
+    <div class="prob-item" data-type="hard">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-08</span>
+        <div class="prob-q">Find the equation of the <em>vertical</em> parabola through <span class="eq">(0, 0)</span>, <span class="eq">(2, 2)</span>, and <span class="eq">(−2, 8)</span>. (Form: <span class="eq">y = ax² + bx + c</span>)</div>
+        <span class="prob-tag hard">3 Points</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Substitute each point into y=ax²+bx+c:<br>
+          <span class="step-line"><strong>(0,0):</strong> 0 = 0 + 0 + c → <strong>c = 0</strong></span>
+          <span class="step-line"><strong>(2,2):</strong> 2 = 4a + 2b + 0 → 4a + 2b = 2 → 2a+b=1 &nbsp;…①</span>
+          <span class="step-line"><strong>(−2,8):</strong> 8 = 4a − 2b + 0 → 4a − 2b = 8 → 2a−b=4 &nbsp;…②</span>
+          <span class="step-line">①+②: 4a = 5 → <strong>a = 5/4</strong></span>
+          <span class="step-line">Sub into ①: 5/2+b=1 → <strong>b = −3/2</strong></span>
+          <div class="formula">y = (5/4)x² − (3/2)x</div>
+          <div class="ans-final">y = (5/4)x² − (3/2)x</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P9 — 3-point parabola -->
+    <div class="prob-item" data-type="hard">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-09</span>
+        <div class="prob-q">Find the vertical parabola through <span class="eq">(1, 3)</span>, <span class="eq">(−1, 5)</span>, and <span class="eq">(2, 6)</span>.</div>
+        <span class="prob-tag hard">3 Points</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Substitute into y=ax²+bx+c:<br>
+          <span class="step-line"><strong>(1,3):</strong> a+b+c=3 &nbsp;…①</span>
+          <span class="step-line"><strong>(−1,5):</strong> a−b+c=5 &nbsp;…②</span>
+          <span class="step-line"><strong>(2,6):</strong> 4a+2b+c=6 &nbsp;…③</span>
+          <span class="step-line">①−②: 2b=−2 → <strong>b=−1</strong></span>
+          <span class="step-line">Sub into ①: a+(−1)+c=3 → a+c=4 &nbsp;…④</span>
+          <span class="step-line">Sub b=−1 into ③: 4a−2+c=6 → 4a+c=8 &nbsp;…⑤</span>
+          <span class="step-line">⑤−④: 3a=4 → <strong>a=4/3</strong>; c=4−4/3=<strong>8/3</strong></span>
+          <div class="formula">y = (4/3)x² − x + 8/3</div>
+          <div class="ans-final">y = (4/3)x² − x + 8/3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P10 — 3-point parabola -->
+    <div class="prob-item" data-type="hard">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-10</span>
+        <div class="prob-q">A parabola <span class="eq">y = ax² + bx + c</span> passes through <span class="eq">(0, 4)</span>, <span class="eq">(1, 1)</span>, and <span class="eq">(2, 4)</span>. Find the equation, vertex, and AOS.</div>
+        <span class="prob-tag hard">3 Points</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          <span class="step-line"><strong>(0,4):</strong> c=4</span>
+          <span class="step-line"><strong>(1,1):</strong> a+b+4=1 → a+b=−3 &nbsp;…①</span>
+          <span class="step-line"><strong>(2,4):</strong> 4a+2b+4=4 → 4a+2b=0 → 2a+b=0 &nbsp;…②</span>
+          <span class="step-line">②−①: a=3; b=−3−3=−6</span>
+          <div class="formula">y = 3x² − 6x + 4</div>
+          <span class="step-line">Vertex x = −b/2a = 6/6 = 1; y=3(1)−6(1)+4=1 → Vertex: (1,1)</span>
+          <span class="step-line">AOS: x = 1</span>
+          <div class="ans-final">y = 3x² − 6x + 4 &nbsp;|&nbsp; Vertex: (1, 1) &nbsp;|&nbsp; AOS: x = 1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P11 -->
+    <div class="prob-item" data-type="para">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-11</span>
+        <div class="prob-q">The directrix of a parabola is <span class="eq">x = 5</span> and the vertex is <span class="eq">(2, 3)</span>. Write the equation.</div>
+        <span class="prob-tag para">Parabola</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          Directrix is a vertical line x=5, vertex x=2. Since directrix is to the <em>right</em> of the vertex, the parabola opens <strong>LEFT</strong>.<br>
+          <span class="step-line">p = distance from vertex to directrix = |5−2| = 3</span>
+          Form: (y−k)²=−4p(x−h), h=2, k=3, p=3<br>
+          <div class="formula">(y − 3)² = −12(x − 2)</div>
+          <span class="step-line">Focus: (h−p, k) = (−1, 3) &nbsp;|&nbsp; AOS: y=3</span>
+          <div class="ans-final">(y − 3)² = −12(x − 2)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P12 — mixed hard -->
+    <div class="prob-item" data-type="hard">
+      <div class="prob-header" onclick="toggleProb(this)">
+        <span class="prob-num">P-12</span>
+        <div class="prob-q">The latus rectum of a parabola has endpoints <span class="eq">(3, 6)</span> and <span class="eq">(3, −2)</span>. The parabola opens right. Find the equation.</div>
+        <span class="prob-tag hard">Hard</span>
+        <span class="prob-chevron">▶</span>
+      </div>
+      <div class="prob-answer">
+        <div class="ans-label">Solution</div>
+        <div class="ans-solution">
+          LR endpoints share the same x=3 → focus is at the midpoint of LR.<br>
+          <span class="step-line">Focus = midpoint of (3,6) and (3,−2) = (3, 2)</span>
+          <span class="step-line">LR length = |6−(−2)| = 8 → 4p = 8 → <strong>p = 2</strong></span>
+          <span class="step-line">Parabola opens right → focus is p units to the right of vertex</span>
+          <span class="step-line">Vertex x = 3−2 = 1, Vertex y = 2 → Vertex: (1, 2)</span>
+          Form: (y−k)²=4p(x−h)<br>
+          <div class="formula">(y − 2)² = 8(x − 1)</div>
+          <div class="ans-final">(y − 2)² = 8(x − 1) &nbsp;|&nbsp; Vertex: (1,2) &nbsp;|&nbsp; Focus: (3,2)</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end prob-grid -->
+
+  <!-- REVEAL ALL button -->
+  <div style="text-align:center; margin-top:1.5rem; position:relative; z-index:1;">
+    <button onclick="revealAll()" style="background:var(--ink); color:var(--gold); border:1px solid var(--gold); font-family:'JetBrains Mono',monospace; font-size:0.8rem; padding:0.6rem 1.6rem; border-radius:3px; cursor:pointer; letter-spacing:0.08em; transition:background 0.2s;">
+      ▸ Reveal All Solutions
+    </button>
+    <button onclick="collapseAll()" style="background:none; color:var(--muted); border:1px solid var(--rule); font-family:'JetBrains Mono',monospace; font-size:0.8rem; padding:0.6rem 1.6rem; border-radius:3px; cursor:pointer; letter-spacing:0.08em; margin-left:0.6rem; transition:all 0.2s;">
+      ▾ Collapse All
+    </button>
+  </div>
+
+</section>
+
+</main>
+<footer class="footer">Math Reviewer &nbsp;·&nbsp; Linear Equations · Circles · Parabola &nbsp;·&nbsp; Algebra / Analytic Geometry</footer>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.target).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// Simple collapsible example toggle
+function toggleEx(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// Multi-example tab switcher
+function switchEx(btn, group, targetId) {
+  btn.closest('.card, .ex-panel')?.querySelectorAll('.ex-tab-btn').forEach(b => b.classList.remove('active'));
+  const allBtns = document.querySelectorAll(`[onclick*="'${group}'"]`);
+  allBtns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll(`[data-group="${group}"]`).forEach(p => p.classList.remove('active'));
+  document.getElementById(targetId).classList.add('active');
+}
+
+// Practice problem toggle
+function toggleProb(header) {
+  const item = header.closest('.prob-item');
+  const wasOpen = item.classList.contains('open');
+  item.classList.toggle('open');
+  updateRevealCount();
+}
+
+function updateRevealCount() {
+  const open = document.querySelectorAll('#probGrid .prob-item.open:not([style*="display: none"]):not([style*="display:none"])').length;
+  const el = document.getElementById('revealCount');
+  if (el) el.textContent = open;
+}
+
+function revealAll() {
+  document.querySelectorAll('#probGrid .prob-item').forEach(item => {
+    if (!item.style.display || item.style.display !== 'none') {
+      item.classList.add('open');
+    }
+  });
+  updateRevealCount();
+}
+
+function collapseAll() {
+  document.querySelectorAll('#probGrid .prob-item').forEach(item => item.classList.remove('open'));
+  updateRevealCount();
+}
+
+// Filter problems
+function filterProbs(btn, type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#probGrid .prob-item').forEach(item => {
+    if (type === 'all') {
+      item.style.display = '';
+    } else {
+      item.style.display = (item.dataset.type === type) ? '' : 'none';
+    }
+  });
+  // Update count text
+  const visible = [...document.querySelectorAll('#probGrid .prob-item')].filter(i => !i.style.display || i.style.display !== 'none').length;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    if (b === btn) {
+      const orig = b.textContent.replace(/\(\d+\)/, `(${visible})`);
+      // don't rewrite, keep it simple
+    }
+  });
+  updateRevealCount();
+}
+</script>
+</body>
+</html>
