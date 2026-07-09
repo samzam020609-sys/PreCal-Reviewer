@@ -102,11 +102,11 @@ body {
 
 /* HIGHLIGHT */
 .highlight-box { background: var(--highlight); border: 1px solid #e6c84a55; border-radius: 3px; padding: 0.85rem 1.1rem; margin: 0.8rem 0; font-size: 0.92rem; color: #5a4800; position: relative; z-index: 1; }
-.highlight-box::before { content: '★ '; color: var(--gold); font-size: 0.8rem; }
+.highlight-box::before { content: ' '; color: var(--gold); font-size: 0.8rem; }
 
 /* WARNING BOX */
 .warn-box { background: #fff0ee; border: 1px solid #b5451b44; border-left: 4px solid var(--accent); border-radius: 3px; padding: 0.85rem 1.1rem; margin: 0.8rem 0; font-size: 0.9rem; color: #6b2000; position: relative; z-index: 1; }
-.warn-box::before { content: '⚠ WATCH OUT  '; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); display: block; margin-bottom: 0.35rem; }
+.warn-box::before { content: ' WATCH OUT  '; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); display: block; margin-bottom: 0.35rem; }
 
 /* DEF LIST */
 .def-list { list-style: none; position: relative; z-index: 1; }
@@ -266,7 +266,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   align-items: center;
   gap: 0.4rem;
 }
-.ans-label::before { content: '✓'; }
+.ans-label::before { content: ''; }
 .ans-solution {
   font-size: 0.9rem;
   line-height: 1.85;
@@ -386,7 +386,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-green">
-    <div class="card-title"> Substituting Into y = mx + b (Step-by-Step)</div>
+    <div class="card-title">️ Substituting Into y = mx + b (Step-by-Step)</div>
     <p>Use this when you know the <strong>slope m</strong> and <strong>one point (x₁, y₁)</strong>:</p>
     <ol class="steps">
       <li>Write the base equation: y = mx + b</li>
@@ -471,7 +471,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   <p class="section-desc">Finding the line equation when (x₁, y₁) and (x₂, y₂) are given</p>
 
   <div class="card card-gold">
-    <div class="card-title">📍 The Core Formula</div>
+    <div class="card-title"> The Core Formula</div>
     <p>First compute the slope, then find b using either point.</p>
     <div class="formula">m = (y₂ − y₁) / (x₂ − x₁)</div>
     <div class="formula">then use: y − y₁ = m(x − x₁) &nbsp;or&nbsp; substitute into y = mx + b</div>
@@ -494,7 +494,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-green">
-    <div class="card-title"> Worked Examples</div>
+    <div class="card-title">️ Worked Examples</div>
     <div class="ex-tabs">
       <button class="ex-tab-btn active" onclick="switchEx(this,'g2','e2a')">Basic</button>
       <button class="ex-tab-btn" onclick="switchEx(this,'g2','e2b')">Negative slope</button>
@@ -506,14 +506,14 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
       m = (9−3)/(4−1) = 6/3 = <strong>2</strong><br>
       Use (1,3): 3 = 2(1) + b → b = 1<br>
       <div class="formula">y = 2x + 1 &nbsp;|&nbsp; GF: 2x − y + 1 = 0</div>
-      Verify: (4,9) → 9 = 2(4)+1 = 9 ✓
+      Verify: (4,9) → 9 = 2(4)+1 = 9 
     </div>
     <div class="ex-panel" id="e2b" data-group="g2">
       <div class="example-label">Points: (−2, 5) and (3, −5)</div>
       m = (−5−5)/(3−(−2)) = −10/5 = <strong>−2</strong><br>
       Use (3,−5): −5 = −2(3) + b → −5 = −6 + b → b = 1<br>
       <div class="formula">y = −2x + 1 &nbsp;|&nbsp; GF: 2x + y − 1 = 0</div>
-      Verify: (−2,5) → 5 = −2(−2)+1 = 5 ✓
+      Verify: (−2,5) → 5 = −2(−2)+1 = 5 
     </div>
     <div class="ex-panel" id="e2c" data-group="g2">
       <div class="example-label">Points: (0, 4) and (6, 7)</div>
@@ -548,7 +548,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card">
-    <div class="card-title">⚠️ Special Cases Summary</div>
+    <div class="card-title">️ Special Cases Summary</div>
     <table class="reviewer-table">
       <thead><tr><th>Condition</th><th>Type</th><th>Equation</th></tr></thead>
       <tbody>
@@ -589,7 +589,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-green">
-    <div class="card-title">🔄 Method via Slope + Substitution</div>
+    <div class="card-title"> Method via Slope + Substitution</div>
     <ol class="steps">
       <li>The two known points are <em>(a, 0)</em> and <em>(0, b)</em></li>
       <li>Compute slope: m = (b − 0) / (0 − a) = <strong>−b/a</strong></li>
@@ -599,7 +599,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-red">
-    <div class="card-title"> Worked Examples</div>
+    <div class="card-title">️ Worked Examples</div>
     <div class="ex-tabs">
       <button class="ex-tab-btn active" onclick="switchEx(this,'g3','e3a')">Example 1</button>
       <button class="ex-tab-btn" onclick="switchEx(this,'g3','e3b')">Example 2 (negative)</button>
@@ -611,7 +611,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
       Via Intercept Form:
       <div class="formula">x/4 + y/6 = 1 → multiply by 12 → 3x + 2y = 12</div>
       <strong>GF:</strong> 3x + 2y − 12 = 0 &nbsp;|&nbsp; <strong>SIF:</strong> y = −(3/2)x + 6<br>
-      Verify: (4,0) → 3(4)+2(0)=12 ✓ &nbsp; (0,6) → 3(0)+2(6)=12 ✓
+      Verify: (4,0) → 3(4)+2(0)=12  &nbsp; (0,6) → 3(0)+2(6)=12 
     </div>
     <div class="ex-panel" id="e3b" data-group="g3">
       <div class="example-label">x-intercept = −3, y-intercept = 5</div>
@@ -619,7 +619,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
       Slope: m = (5−0)/(0−(−3)) = 5/3<br>
       <div class="formula">y = (5/3)x + 5 → multiply by 3 → 3y = 5x + 15</div>
       <strong>GF:</strong> 5x − 3y + 15 = 0<br>
-      <div class="shortcut-box">Quick intercept form check: x/−3 + y/5 = 1 → multiply by −15 → 5x − 3y = −15 → 5x − 3y + 15 = 0 ✓</div>
+      <div class="shortcut-box">Quick intercept form check: x/−3 + y/5 = 1 → multiply by −15 → 5x − 3y = −15 → 5x − 3y + 15 = 0 </div>
     </div>
     <div class="ex-panel" id="e3c" data-group="g3">
       <div class="example-label">x-intercept = 2, y-intercept = 3</div>
@@ -735,11 +735,11 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
       </svg>
       <div class="graph-title">Intersection → solution (2, 3)</div>
     </div>
-    <div class="highlight-box">Verify: (2,3) in y=x+1 → 3=2+1 ✓ &nbsp;|&nbsp; (2,3) in y=−x+5 → 3=−2+5 ✓</div>
+    <div class="highlight-box">Verify: (2,3) in y=x+1 → 3=2+1  &nbsp;|&nbsp; (2,3) in y=−x+5 → 3=−2+5 </div>
   </div>
 
   <div class="card card-red">
-    <div class="card-title">📌 How to Plot Using Slope (Visual Method)</div>
+    <div class="card-title"> How to Plot Using Slope (Visual Method)</div>
     <div class="two-col">
       <div class="mini-card">
         <strong>Positive slope (m = 2/3)</strong><br>
@@ -756,7 +756,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card">
-    <div class="card-title">📋 Reading the Graph — What to Expect</div>
+    <div class="card-title"> Reading the Graph — What to Expect</div>
     <table class="reviewer-table">
       <thead><tr><th>What you see on graph</th><th>Conclusion</th><th>Type of system</th></tr></thead>
       <tbody>
@@ -798,7 +798,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-green">
-    <div class="card-title"> Worked Examples</div>
+    <div class="card-title">️ Worked Examples</div>
     <div class="ex-tabs">
       <button class="ex-tab-btn active" onclick="switchEx(this,'g5','e5a')">Opposites ready</button>
       <button class="ex-tab-btn" onclick="switchEx(this,'g5','e5b')">Multiply one eq.</button>
@@ -812,7 +812,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
       <div class="formula">Add: (2x+4x) + (3y−3y) = 12+6 → 6x = 18 → x = 3</div>
       Sub x=3 into eq.1: 2(3)+3y=12 → 6+3y=12 → 3y=6 → <strong>y=2</strong>
       <div class="formula">Solution: (3, 2)</div>
-      Check: eq.2 → 4(3)−3(2)=12−6=6 ✓
+      Check: eq.2 → 4(3)−3(2)=12−6=6 
     </div>
     <div class="ex-panel" id="e5b" data-group="g5">
       <div class="example-label">System: 3x + 2y = 11 and x + y = 4</div>
@@ -820,7 +820,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
       <div class="formula">Add: (3x−3x)+(2y−3y)=11−12 → −y = −1 → y = 1</div>
       Sub y=1 into eq.2: x+1=4 → <strong>x=3</strong>
       <div class="formula">Solution: (3, 1)</div>
-      Check eq.1: 3(3)+2(1)=9+2=11 ✓
+      Check eq.1: 3(3)+2(1)=9+2=11 
     </div>
     <div class="ex-panel" id="e5c" data-group="g5">
       <div class="example-label">System: 2x + 3y = 7 and 3x + 5y = 11</div>
@@ -881,7 +881,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   <p class="section-desc">Parallel, Perpendicular, Intersecting, and Overlapping Lines</p>
 
   <div class="card card-gold">
-    <div class="card-title"> Complete Classification Table</div>
+    <div class="card-title">️ Complete Classification Table</div>
     <table class="reviewer-table">
       <thead><tr><th>Type</th><th>Slope Condition</th><th>y-int</th><th>Solutions</th><th>System Type</th></tr></thead>
       <tbody>
@@ -926,11 +926,11 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
     <table class="reviewer-table">
       <thead><tr><th>Slope m₁</th><th>Perpendicular slope m₂</th><th>Check: m₁×m₂</th></tr></thead>
       <tbody>
-        <tr><td>2</td><td>−1/2</td><td>2 × (−1/2) = −1 ✓</td></tr>
-        <tr><td>3/4</td><td>−4/3</td><td>(3/4)(−4/3) = −1 ✓</td></tr>
-        <tr><td>−5</td><td>1/5</td><td>(−5)(1/5) = −1 ✓</td></tr>
-        <tr><td>1</td><td>−1</td><td>1×(−1) = −1 ✓</td></tr>
-        <tr><td>−2/3</td><td>3/2</td><td>(−2/3)(3/2) = −1 ✓</td></tr>
+        <tr><td>2</td><td>−1/2</td><td>2 × (−1/2) = −1 </td></tr>
+        <tr><td>3/4</td><td>−4/3</td><td>(3/4)(−4/3) = −1 </td></tr>
+        <tr><td>−5</td><td>1/5</td><td>(−5)(1/5) = −1 </td></tr>
+        <tr><td>1</td><td>−1</td><td>1×(−1) = −1 </td></tr>
+        <tr><td>−2/3</td><td>3/2</td><td>(−2/3)(3/2) = −1 </td></tr>
       </tbody>
     </table>
     <div class="shortcut-box">
@@ -950,7 +950,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-red">
-    <div class="card-title"> Overlapping (Coincident) Lines</div>
+    <div class="card-title">↔️ Overlapping (Coincident) Lines</div>
     <p>When two different-looking equations actually represent the <strong>same line</strong>. Every point on the line is a solution.</p>
     <p>This happens when one equation is just a <em>scalar multiple</em> of the other.</p>
     <div class="ex-tabs">
@@ -971,7 +971,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card">
-    <div class="card-title"> Visual Summary of All Four Types</div>
+    <div class="card-title">️ Visual Summary of All Four Types</div>
     <div class="graph-wrap">
       <svg viewBox="0 0 530 175" width="530" height="175">
         <!-- Panel 1: Intersecting -->
@@ -1062,7 +1062,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-blue">
-    <div class="card-title"> Midpoint Formula</div>
+    <div class="card-title">➕ Midpoint Formula</div>
     <p>The midpoint is simply the <strong>average</strong> of the x-coordinates and the average of the y-coordinates.</p>
     <div class="formula">M = ((x₁ + x₂)/2 , (y₁ + y₂)/2)</div>
     <div class="shortcut-box">
@@ -1092,7 +1092,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-green">
-    <div class="card-title"> Standard Form of a Circle</div>
+    <div class="card-title">⭕ Standard Form of a Circle</div>
     <p>A circle with center (h, k) and radius r:</p>
     <div class="formula">(x − h)² + (y − k)² = r²</div>
     <ul class="def-list">
@@ -1123,7 +1123,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-red">
-    <div class="card-title">🔁 General Form → Standard Form (Completing the Square)</div>
+    <div class="card-title"> General Form → Standard Form (Completing the Square)</div>
     <div class="formula">x² + y² + Dx + Ey + F = 0</div>
     <ol class="steps">
       <li>Group x-terms and y-terms: (x² + Dx) + (y² + Ey) = −F</li>
@@ -1170,7 +1170,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   </div>
 
   <div class="card card-purple">
-    <div class="card-title"> Given Diameter Endpoints → Circle Equation</div>
+    <div class="card-title">️ Given Diameter Endpoints → Circle Equation</div>
     <ol class="steps">
       <li>Use <strong>Midpoint Formula</strong> to find the center (midpoint of diameter)</li>
       <li>Use <strong>Distance Formula</strong> to find diameter length, then r = diameter/2<br>
@@ -1228,7 +1228,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- WHAT IS A PARABOLA -->
   <div class="card card-gold">
-    <div class="card-title">🪄 What Is a Parabola?</div>
+    <div class="card-title"> What Is a Parabola?</div>
     <p>A <strong>parabola</strong> is the set of all points in a plane that are <em>equidistant</em> from a fixed point called the <strong>focus</strong> and a fixed line called the <strong>directrix</strong>. That equal distance is called <strong>p</strong> (or sometimes <em>a</em> or <em>c</em>).</p>
     <div class="formula">distance from point to Focus = distance from point to Directrix</div>
     <ul class="def-list">
@@ -1296,7 +1296,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- VERTEX NOT AT ORIGIN -->
   <div class="card card-green">
-    <div class="card-title">📍 Vertex NOT at Origin — General Standard Form</div>
+    <div class="card-title"> Vertex NOT at Origin — General Standard Form</div>
     <p>When the vertex is at <strong>(h, k)</strong>, just shift everything by (h, k):</p>
     <table class="reviewer-table">
       <thead><tr><th>Opening</th><th>Equation</th><th>Focus</th><th>Directrix</th><th>AOS</th></tr></thead>
@@ -1388,7 +1388,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- VISUAL DIAGRAMS -->
   <div class="card">
-    <div class="card-title"> Visual Diagrams — All Four Orientations</div>
+    <div class="card-title">️ Visual Diagrams — All Four Orientations</div>
     <div class="graph-wrap">
       <svg viewBox="0 0 580 300" width="580" height="300">
 
@@ -1513,7 +1513,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- WORKED EXAMPLES -->
   <div class="card card-green">
-    <div class="card-title"> Worked Examples — Extracting All Parts</div>
+    <div class="card-title">️ Worked Examples — Extracting All Parts</div>
     <div class="ex-tabs">
       <button class="ex-tab-btn active" onclick="switchEx(this,'g8','e8a')">Upward (origin)</button>
       <button class="ex-tab-btn" onclick="switchEx(this,'g8','e8b')">Rightward (origin)</button>
@@ -1587,7 +1587,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- GENERAL FORM → STANDARD FORM -->
   <div class="card card-red">
-    <div class="card-title">🔁 General Form → Standard Form (Complete the Square)</div>
+    <div class="card-title"> General Form → Standard Form (Complete the Square)</div>
     <p>Parabolas in General Form look like <strong>Ax² + Dx + Ey + F = 0</strong> (vertical) or <strong>Cy² + Dx + Ey + F = 0</strong> (horizontal). Convert by completing the square on the squared term.</p>
     <ol class="steps">
       <li>Isolate the squared-variable terms on one side and the linear terms on the other</li>
@@ -1609,7 +1609,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- SHORTCUT CHEAT SHEET -->
   <div class="card">
-    <div class="card-title">⚡ Full Parabola Cheat Sheet</div>
+    <div class="card-title"> Full Parabola Cheat Sheet</div>
     <table class="reviewer-table">
       <thead><tr><th>Property</th><th>Vertical (x² form)</th><th>Horizontal (y² form)</th></tr></thead>
       <tbody>
@@ -1652,8 +1652,8 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
   <div class="prob-filter">
     <button class="filter-btn active" onclick="filterProbs(this,'all')">All (22)</button>
     <button class="filter-btn" onclick="filterProbs(this,'circ')">⭕ Circles</button>
-    <button class="filter-btn" onclick="filterProbs(this,'para')">🪄 Parabolas</button>
-    <button class="filter-btn" onclick="filterProbs(this,'hard')">🔥 3-Point / Hard</button>
+    <button class="filter-btn" onclick="filterProbs(this,'para')"> Parabolas</button>
+    <button class="filter-btn" onclick="filterProbs(this,'hard')"> 3-Point / Hard</button>
   </div>
   <div class="prob-score">Revealed: <span id="revealCount">0</span> / 22</div>
 
@@ -1999,7 +1999,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
           Focus is below vertex → opens <strong>downward</strong>. p=3.<br>
           Form: x² = −4py<br>
           <div class="formula">x² = −4(3)y = −12y</div>
-          Verify: directrix y=3 (above vertex), AOS x=0 ✓
+          Verify: directrix y=3 (above vertex), AOS x=0 
           <div class="ans-final">x² = −12y</div>
         </div>
       </div>
@@ -2432,7 +2432,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- VISUAL DIAGRAM — 4 panels -->
   <div class="card card-purple">
-    <div class="card-title"> All Four Standard Orientations — Visual Guide</div>
+    <div class="card-title">️ All Four Standard Orientations — Visual Guide</div>
 
     <!-- Row 1: Horizontal at origin + Vertical at origin -->
     <div class="graph-wrap" style="margin-bottom:0.8rem;">
@@ -2591,7 +2591,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- HOW TO SOLVE — STEP BY STEP -->
   <div class="card card-gold">
-    <div class="card-title">🔄 How to Extract All Parts From an Equation</div>
+    <div class="card-title"> How to Extract All Parts From an Equation</div>
     <ol class="steps">
       <li><strong>Make sure the equation = 1.</strong> If it's not, divide everything by the constant on the right.</li>
       <li><strong>Identify the center (h, k)</strong> from the equation. Remember to flip signs: (x−3)² → h=3, (y+2)² → k=−2.</li>
@@ -2614,7 +2614,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- WORKED EXAMPLES -->
   <div class="card card-blue">
-    <div class="card-title">✏️ Fully Worked Examples</div>
+    <div class="card-title">️ Fully Worked Examples</div>
     <div class="ex-tabs">
       <button class="ex-tab-btn active" onclick="switchEx(this,'g10','e10a')">Horizontal (origin)</button>
       <button class="ex-tab-btn" onclick="switchEx(this,'g10','e10b')">Vertical (origin)</button>
@@ -2753,7 +2753,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- WRITING THE EQUATION -->
   <div class="card card-green">
-    <div class="card-title">📝 Writing the Equation from Given Information</div>
+    <div class="card-title"> Writing the Equation from Given Information</div>
     <ol class="steps">
       <li>Identify the center (h, k) — if not given, it's (0, 0)</li>
       <li>Identify a (distance from center to vertex)</li>
@@ -2789,7 +2789,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- GENERAL FORM → STANDARD FORM -->
   <div class="card card-red">
-    <div class="card-title">🔁 General Form → Standard Form (Complete the Square)</div>
+    <div class="card-title"> General Form → Standard Form (Complete the Square)</div>
     <p>Ellipses in general form look like <strong>Ax² + By² + Cx + Dy + E = 0</strong> where A ≠ B but both are positive. Convert by completing the square on both variables.</p>
     <ol class="steps">
       <li>Group x-terms and y-terms: (Ax²+Cx) + (By²+Dy) = −E</li>
@@ -2814,7 +2814,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- SHORTCUTS CHEAT SHEET -->
   <div class="card">
-    <div class="card-title">⚡ Full Ellipse Cheat Sheet</div>
+    <div class="card-title"> Full Ellipse Cheat Sheet</div>
     <table class="reviewer-table">
       <thead><tr><th>Property</th><th>Horizontal (a² under x²)</th><th>Vertical (a² under y²)</th></tr></thead>
       <tbody>
@@ -2849,7 +2849,7 @@ hr.rule { border: none; border-top: 1px solid #ffffff10; margin: 1.5rem 0; }
 
   <!-- PRACTICE PROBLEMS — HIDDEN SOLUTIONS -->
   <div class="card card-gold">
-    <div class="card-title">🧪 Practice Problems — Tap to Reveal Solutions</div>
+    <div class="card-title"> Practice Problems — Tap to Reveal Solutions</div>
     <div class="prob-grid" id="ellipseProbs">
 
       <!-- E1 -->
